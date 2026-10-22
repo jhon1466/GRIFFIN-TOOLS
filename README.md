@@ -17,12 +17,8 @@ Todo el catálogo (nombres, iconos, retratos de personajes y skins) va **empaque
 ## Uso
 
 1. Descarga `Griffin-GM-Tools.exe` de [Releases](../../releases) (no necesita instalación).
-2. Arranca el servidor GRIFFIN con un token de al menos 24 caracteres. En PowerShell, antes de `scripts\start-server.ps1`:
-   ```powershell
-   $env:GRIFFIN_GM_TOKEN = -join ((48..57 + 65..90 + 97..122) | Get-Random -Count 40 | ForEach-Object { [char]$_ })
-   $env:GRIFFIN_GM_TOKEN   # cópialo
-   ```
-   (también puedes poner `GmAdmin:Token` en `Griffin/appsettings.json`).
+2. Arranca el servidor GRIFFIN con `scripts\start-server.ps1`. La primera vez genera el token de la API GM y lo guarda en `GRIFFIN_GM_TOKEN.txt` (en la carpeta del repositorio; no se sube a git). Ábrelo y copia su contenido.
+   (Si prefieres tu propio token, de al menos 24 caracteres, pon `GRIFFIN_GM_TOKEN` en el entorno o crea ese archivo antes de arrancar.)
 3. Abre la aplicación, deja el servidor en `https://127.0.0.1`, pega el token y pulsa **Conectar**. El token se guarda en el Administrador de credenciales de Windows.
 
 Seguridad: la API del servidor solo acepta HTTPS desde `127.0.0.1`/`::1` con el token, y la aplicación rechaza cualquier otra dirección.
