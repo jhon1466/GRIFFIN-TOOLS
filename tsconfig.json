@@ -1,0 +1,10 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "allowJs": true,
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules", "dist", "src-tauri/target"]
+}

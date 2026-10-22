@@ -1,0 +1,1599 @@
+{
+  "source": "https://gf2-bbs.exiliumgf.com/wiki/category",
+  "api": "https://gf2-bbs-api.exiliumgf.com/wiki/handbook",
+  "fetchedAtUtc": "2026-10-21T23:32:19.263412+00:00",
+  "characters": [
+    {
+      "id": 1085,
+      "name": "针",
+      "image": "/catalog/characters/1085.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1085"
+    },
+    {
+      "id": 1081,
+      "name": "伊格蕾塔",
+      "image": "/catalog/characters/1081.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1081"
+    },
+    {
+      "id": 1073,
+      "name": "六分仪",
+      "image": "/catalog/characters/1073.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1073"
+    },
+    {
+      "id": 1074,
+      "name": "OTs-14",
+      "image": "/catalog/characters/1074.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1074"
+    },
+    {
+      "id": 1083,
+      "name": "代理人",
+      "image": "/catalog/characters/1083.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1083"
+    },
+    {
+      "id": 1084,
+      "name": "寇尔芙·镜刻",
+      "image": "/catalog/characters/1084.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1084"
+    },
+    {
+      "id": 1080,
+      "name": "阿斯缇亚",
+      "image": "/catalog/characters/1080.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1080"
+    },
+    {
+      "id": 1072,
+      "name": "刘莳",
+      "image": "/catalog/characters/1072.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1072"
+    },
+    {
+      "id": 1062,
+      "name": "刘易斯",
+      "image": "/catalog/characters/1062.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1062"
+    },
+    {
+      "id": 1082,
+      "name": "希丽雅",
+      "image": "/catalog/characters/1082.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1082"
+    },
+    {
+      "id": 1078,
+      "name": "芙铃",
+      "image": "/catalog/characters/1078.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1078"
+    },
+    {
+      "id": 1079,
+      "name": "克莱妲",
+      "image": "/catalog/characters/1079.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1079"
+    },
+    {
+      "id": 1068,
+      "name": "樱花",
+      "image": "/catalog/characters/1068.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1068"
+    },
+    {
+      "id": 1063,
+      "name": "维尔德",
+      "image": "/catalog/characters/1063.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1063"
+    },
+    {
+      "id": 1058,
+      "name": "莱妮",
+      "image": "/catalog/characters/1058.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1058"
+    },
+    {
+      "id": 1077,
+      "name": "米蒂尔",
+      "image": "/catalog/characters/1077.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1077"
+    },
+    {
+      "id": 1076,
+      "name": "索普",
+      "image": "/catalog/characters/1076.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1076"
+    },
+    {
+      "id": 1075,
+      "name": "纳美西丝·衍光",
+      "image": "/catalog/characters/1075.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1075"
+    },
+    {
+      "id": 1070,
+      "name": "夏安",
+      "image": "/catalog/characters/1070.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1070"
+    },
+    {
+      "id": 1071,
+      "name": "贝丝蒂",
+      "image": "/catalog/characters/1071.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1071"
+    },
+    {
+      "id": 1069,
+      "name": "罗蕾莱",
+      "image": "/catalog/characters/1069.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1069"
+    },
+    {
+      "id": 1049,
+      "name": "哈卜茜",
+      "image": "/catalog/characters/1049.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1049"
+    },
+    {
+      "id": 1067,
+      "name": "海伦",
+      "image": "/catalog/characters/1067.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1067"
+    },
+    {
+      "id": 1066,
+      "name": "威玛西娜",
+      "image": "/catalog/characters/1066.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1066"
+    },
+    {
+      "id": 1064,
+      "name": "芙洛伦",
+      "image": "/catalog/characters/1064.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1064"
+    },
+    {
+      "id": 1065,
+      "name": "埃芙",
+      "image": "/catalog/characters/1065.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1065"
+    },
+    {
+      "id": 1061,
+      "name": "巴希达",
+      "image": "/catalog/characters/1061.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1061"
+    },
+    {
+      "id": 1059,
+      "name": "琳德",
+      "image": "/catalog/characters/1059.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1059"
+    },
+    {
+      "id": 1060,
+      "name": "翡图萨",
+      "image": "/catalog/characters/1060.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1060"
+    },
+    {
+      "id": 1057,
+      "name": "洛贝拉",
+      "image": "/catalog/characters/1057.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1057"
+    },
+    {
+      "id": 1056,
+      "name": "莱娅",
+      "image": "/catalog/characters/1056.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1056"
+    },
+    {
+      "id": 1055,
+      "name": "妮基塔",
+      "image": "/catalog/characters/1055.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1055"
+    },
+    {
+      "id": 1054,
+      "name": "幼熙",
+      "image": "/catalog/characters/1054.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1054"
+    },
+    {
+      "id": 1048,
+      "name": "秋桦",
+      "image": "/catalog/characters/1048.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1048"
+    },
+    {
+      "id": 1053,
+      "name": "佩莉",
+      "image": "/catalog/characters/1053.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1053"
+    },
+    {
+      "id": 1043,
+      "name": "绯",
+      "image": "/catalog/characters/1043.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1043"
+    },
+    {
+      "id": 1047,
+      "name": "春田",
+      "image": "/catalog/characters/1047.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1047"
+    },
+    {
+      "id": 1045,
+      "name": "比悠卡",
+      "image": "/catalog/characters/1045.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1045"
+    },
+    {
+      "id": 1042,
+      "name": "安朵丝",
+      "image": "/catalog/characters/1042.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1042"
+    },
+    {
+      "id": 1044,
+      "name": "维克托",
+      "image": "/catalog/characters/1044.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1044"
+    },
+    {
+      "id": 1051,
+      "name": "米什缇",
+      "image": "/catalog/characters/1051.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1051"
+    },
+    {
+      "id": 1052,
+      "name": "可露凯",
+      "image": "/catalog/characters/1052.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1052"
+    },
+    {
+      "id": 1040,
+      "name": "波波沙",
+      "image": "/catalog/characters/1040.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1040"
+    },
+    {
+      "id": 1050,
+      "name": "朝晖",
+      "image": "/catalog/characters/1050.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1050"
+    },
+    {
+      "id": 1023,
+      "name": "杜莎妮",
+      "image": "/catalog/characters/1023.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1023"
+    },
+    {
+      "id": 1039,
+      "name": "索米",
+      "image": "/catalog/characters/1039.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1039"
+    },
+    {
+      "id": 1041,
+      "name": "洛塔",
+      "image": "/catalog/characters/1041.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1041"
+    },
+    {
+      "id": 1037,
+      "name": "乌尔丽德",
+      "image": "/catalog/characters/1037.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1037"
+    },
+    {
+      "id": 1035,
+      "name": "绛雨",
+      "image": "/catalog/characters/1035.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1035"
+    },
+    {
+      "id": 1013,
+      "name": "莱娜",
+      "image": "/catalog/characters/1013.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1013"
+    },
+    {
+      "id": 1038,
+      "name": "莉塔拉",
+      "image": "/catalog/characters/1038.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1038"
+    },
+    {
+      "id": 1036,
+      "name": "科谢尼娅",
+      "image": "/catalog/characters/1036.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1036"
+    },
+    {
+      "id": 1033,
+      "name": "莫辛纳甘",
+      "image": "/catalog/characters/1033.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1033"
+    },
+    {
+      "id": 1034,
+      "name": "玛绮朵",
+      "image": "/catalog/characters/1034.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1034"
+    },
+    {
+      "id": 1032,
+      "name": "黛烟",
+      "image": "/catalog/characters/1032.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1032"
+    },
+    {
+      "id": 1027,
+      "name": "琼玖",
+      "image": "/catalog/characters/1027.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1027"
+    },
+    {
+      "id": 1026,
+      "name": "纳甘",
+      "image": "/catalog/characters/1026.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1026"
+    },
+    {
+      "id": 1029,
+      "name": "塞布丽娜",
+      "image": "/catalog/characters/1029.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1029"
+    },
+    {
+      "id": 1025,
+      "name": "托洛洛",
+      "image": "/catalog/characters/1025.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1025"
+    },
+    {
+      "id": 1028,
+      "name": "桑朵莱希",
+      "image": "/catalog/characters/1028.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1028"
+    },
+    {
+      "id": 1024,
+      "name": "奇塔",
+      "image": "/catalog/characters/1024.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1024"
+    },
+    {
+      "id": 1022,
+      "name": "夏克里",
+      "image": "/catalog/characters/1022.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1022"
+    },
+    {
+      "id": 1021,
+      "name": "佩里缇亚",
+      "image": "/catalog/characters/1021.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1021"
+    },
+    {
+      "id": 1015,
+      "name": "维普蕾",
+      "image": "/catalog/characters/1015.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1015"
+    },
+    {
+      "id": 1009,
+      "name": "寇尔芙",
+      "image": "/catalog/characters/1009.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1009"
+    },
+    {
+      "id": 1001,
+      "name": "克罗丽科",
+      "image": "/catalog/characters/1001.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1001"
+    },
+    {
+      "id": 1008,
+      "name": "纳美西丝",
+      "image": "/catalog/characters/1008.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1008"
+    },
+    {
+      "id": 1017,
+      "name": "闪电",
+      "image": "/catalog/characters/1017.png",
+      "sourceUrl": "https://gf2-bbs.exiliumgf.com/wiki/doll?id=1017"
+    }
+  ],
+  "weapons": [
+    {
+      "id": 10853,
+      "name": "天鹅之死",
+      "image": "/catalog/weapons/10853.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10852,
+      "name": "挽歌",
+      "image": "/catalog/weapons/10852.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10851,
+      "name": "旧式挽歌",
+      "image": "/catalog/weapons/10851.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10833,
+      "name": "恶兆之钥",
+      "image": "/catalog/weapons/10833.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10843,
+      "name": "毕宿五",
+      "image": "/catalog/weapons/10843.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10823,
+      "name": "斯诺特拉",
+      "image": "/catalog/weapons/10823.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10803,
+      "name": "忏悔罗盘",
+      "image": "/catalog/weapons/10803.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10813,
+      "name": "银翼匹丝缇",
+      "image": "/catalog/weapons/10813.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10793,
+      "name": "切尔诺伯格",
+      "image": "/catalog/weapons/10793.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10783,
+      "name": "森牙戾兽",
+      "image": "/catalog/weapons/10783.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10763,
+      "name": "碎穹嚎歌",
+      "image": "/catalog/weapons/10763.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10623,
+      "name": "玩具匠",
+      "image": "/catalog/weapons/10623.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10633,
+      "name": "缄默制裁",
+      "image": "/catalog/weapons/10633.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10743,
+      "name": "卡庇托林",
+      "image": "/catalog/weapons/10743.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10773,
+      "name": "绒鼠新星",
+      "image": "/catalog/weapons/10773.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10753,
+      "name": "西比尔",
+      "image": "/catalog/weapons/10753.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10713,
+      "name": "告死礼赞",
+      "image": "/catalog/weapons/10713.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10733,
+      "name": "暮色蔷薇",
+      "image": "/catalog/weapons/10733.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10723,
+      "name": "绝影",
+      "image": "/catalog/weapons/10723.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10683,
+      "name": "绯红契约",
+      "image": "/catalog/weapons/10683.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10703,
+      "name": "夜行豆蔻",
+      "image": "/catalog/weapons/10703.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10453,
+      "name": "林野精灵",
+      "image": "/catalog/weapons/10453.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10693,
+      "name": "潮涌夜曲",
+      "image": "/catalog/weapons/10693.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10493,
+      "name": "二律背反",
+      "image": "/catalog/weapons/10493.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10673,
+      "name": "谧语永护",
+      "image": "/catalog/weapons/10673.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10553,
+      "name": "护梦银翼",
+      "image": "/catalog/weapons/10553.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10603,
+      "name": "因果律理",
+      "image": "/catalog/weapons/10603.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11056,
+      "name": "女仆准则",
+      "image": "/catalog/weapons/11056.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11053,
+      "name": "重弦",
+      "image": "/catalog/weapons/11053.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11047,
+      "name": "梅扎露娜",
+      "image": "/catalog/weapons/11047.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11044,
+      "name": "金石奏",
+      "image": "/catalog/weapons/11044.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11038,
+      "name": "游星",
+      "image": "/catalog/weapons/11038.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11020,
+      "name": "光学幻境",
+      "image": "/catalog/weapons/11020.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11016,
+      "name": "猎心者",
+      "image": "/catalog/weapons/11016.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10663,
+      "name": "6P71",
+      "image": "/catalog/weapons/10663.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10643,
+      "name": "伊阿索",
+      "image": "/catalog/weapons/10643.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10653,
+      "name": "6P33",
+      "image": "/catalog/weapons/10653.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10613,
+      "name": "尼奥尔德",
+      "image": "/catalog/weapons/10613.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10583,
+      "name": "骄阳构想",
+      "image": "/catalog/weapons/10583.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10593,
+      "name": "刺棘法则",
+      "image": "/catalog/weapons/10593.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10563,
+      "name": "狡狐",
+      "image": "/catalog/weapons/10563.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10573,
+      "name": "流浪者赞歌",
+      "image": "/catalog/weapons/10573.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10543,
+      "name": "流光花火",
+      "image": "/catalog/weapons/10543.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10533,
+      "name": "厄梅尼塔",
+      "image": "/catalog/weapons/10533.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10523,
+      "name": "斯库拉",
+      "image": "/catalog/weapons/10523.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10513,
+      "name": "白日梦",
+      "image": "/catalog/weapons/10513.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10503,
+      "name": "不留行",
+      "image": "/catalog/weapons/10503.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10483,
+      "name": "逐光",
+      "image": "/catalog/weapons/10483.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10473,
+      "name": "信仰棘光",
+      "image": "/catalog/weapons/10473.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10443,
+      "name": "报丧轻语",
+      "image": "/catalog/weapons/10443.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10433,
+      "name": "赫斯提亚",
+      "image": "/catalog/weapons/10433.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10423,
+      "name": "阿格莱亚",
+      "image": "/catalog/weapons/10423.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10403,
+      "name": "斯瓦罗格",
+      "image": "/catalog/weapons/10403.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10393,
+      "name": "未言使命",
+      "image": "/catalog/weapons/10393.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10373,
+      "name": "流羽白英",
+      "image": "/catalog/weapons/10373.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10353,
+      "name": "跃虎",
+      "image": "/catalog/weapons/10353.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10343,
+      "name": "苦涩焦糖",
+      "image": "/catalog/weapons/10343.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10333,
+      "name": "斯摩希克",
+      "image": "/catalog/weapons/10333.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10233,
+      "name": "传颂之诗",
+      "image": "/catalog/weapons/10233.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10133,
+      "name": "幼狮",
+      "image": "/catalog/weapons/10133.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10007,
+      "name": "远行游鸽",
+      "image": "/catalog/weapons/10007.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10006,
+      "name": "妙尔尼尔",
+      "image": "/catalog/weapons/10006.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10005,
+      "name": "王冠鹿角兔",
+      "image": "/catalog/weapons/10005.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10004,
+      "name": "盖尔诺",
+      "image": "/catalog/weapons/10004.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10003,
+      "name": "阿尔克纳",
+      "image": "/catalog/weapons/10003.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10002,
+      "name": "绝密手稿",
+      "image": "/catalog/weapons/10002.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10001,
+      "name": "喧闹恶灵",
+      "image": "/catalog/weapons/10001.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10792,
+      "name": "12型突击步枪",
+      "image": "/catalog/weapons/10792.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10832,
+      "name": "黑棘",
+      "image": "/catalog/weapons/10832.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10822,
+      "name": "格威尔36-康派科特",
+      "image": "/catalog/weapons/10822.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10802,
+      "name": "阿玛莱特15型自动步枪",
+      "image": "/catalog/weapons/10802.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10632,
+      "name": "马克二型栓动手枪",
+      "image": "/catalog/weapons/10632.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10812,
+      "name": "沙漠之鹰",
+      "image": "/catalog/weapons/10812.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10782,
+      "name": "格威尔41",
+      "image": "/catalog/weapons/10782.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10772,
+      "name": "90型单兵自卫武器",
+      "image": "/catalog/weapons/10772.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10722,
+      "name": "刘氏步枪",
+      "image": "/catalog/weapons/10722.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10762,
+      "name": "特殊模组战术步枪",
+      "image": "/catalog/weapons/10762.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10742,
+      "name": "闪电-3",
+      "image": "/catalog/weapons/10742.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10732,
+      "name": "夜蛇",
+      "image": "/catalog/weapons/10732.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10712,
+      "name": "马克23进攻型手枪",
+      "image": "/catalog/weapons/10712.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10702,
+      "name": "干预200",
+      "image": "/catalog/weapons/10702.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11052,
+      "name": "九五式",
+      "image": "/catalog/weapons/11052.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11055,
+      "name": "格威尔36",
+      "image": "/catalog/weapons/11055.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11049,
+      "name": "纳甘左轮",
+      "image": "/catalog/weapons/11049.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11046,
+      "name": "特殊用途自动型霰弹枪",
+      "image": "/catalog/weapons/11046.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11043,
+      "name": "一九一式",
+      "image": "/catalog/weapons/11043.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11040,
+      "name": "黑科赫7",
+      "image": "/catalog/weapons/11040.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11037,
+      "name": "卡拉什-阿尔法",
+      "image": "/catalog/weapons/11037.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11031,
+      "name": "罗宾逊先进步枪",
+      "image": "/catalog/weapons/11031.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11026,
+      "name": "佩切涅",
+      "image": "/catalog/weapons/11026.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11023,
+      "name": "格洛利娅",
+      "image": "/catalog/weapons/11023.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11021,
+      "name": "莫洛12",
+      "image": "/catalog/weapons/11021.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11015,
+      "name": "金牛座曲线",
+      "image": "/catalog/weapons/11015.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11014,
+      "name": "复仇女神",
+      "image": "/catalog/weapons/11014.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11007,
+      "name": "野兔",
+      "image": "/catalog/weapons/11007.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10692,
+      "name": "因戈尔夫50",
+      "image": "/catalog/weapons/10692.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10492,
+      "name": "施泰尔冲锋手枪",
+      "image": "/catalog/weapons/10492.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10682,
+      "name": "樱花冲锋枪",
+      "image": "/catalog/weapons/10682.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10672,
+      "name": "12型双管霰弹枪",
+      "image": "/catalog/weapons/10672.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10662,
+      "name": "卡拉什尼科夫突击步枪15",
+      "image": "/catalog/weapons/10662.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10652,
+      "name": "尼科诺夫突击步枪94",
+      "image": "/catalog/weapons/10652.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10642,
+      "name": "15型自动手枪",
+      "image": "/catalog/weapons/10642.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10622,
+      "name": "刘易斯轻机枪",
+      "image": "/catalog/weapons/10622.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10612,
+      "name": "拉赫蒂26型轻机枪",
+      "image": "/catalog/weapons/10612.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10602,
+      "name": "灰棘",
+      "image": "/catalog/weapons/10602.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10592,
+      "name": "艾奇逊12自动霰弹枪",
+      "image": "/catalog/weapons/10592.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10582,
+      "name": "通用冲锋枪40",
+      "image": "/catalog/weapons/10582.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10572,
+      "name": "柯尔特635型冲锋枪",
+      "image": "/catalog/weapons/10572.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10562,
+      "name": "通用冲锋枪45",
+      "image": "/catalog/weapons/10562.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10552,
+      "name": "维斯卡94",
+      "image": "/catalog/weapons/10552.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10542,
+      "name": "卡宾刻2型",
+      "image": "/catalog/weapons/10542.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10532,
+      "name": "五号九毫米冲锋枪",
+      "image": "/catalog/weapons/10532.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10522,
+      "name": "黑克勒科赫416",
+      "image": "/catalog/weapons/10522.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10512,
+      "name": "无壳弹步枪11",
+      "image": "/catalog/weapons/10512.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10502,
+      "name": "长风零六",
+      "image": "/catalog/weapons/10502.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10482,
+      "name": "九七式霰",
+      "image": "/catalog/weapons/10482.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10472,
+      "name": "斯普林菲尔德",
+      "image": "/catalog/weapons/10472.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10452,
+      "name": "格威尔28",
+      "image": "/catalog/weapons/10452.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10442,
+      "name": "短剑",
+      "image": "/catalog/weapons/10442.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10432,
+      "name": "斯柯达75",
+      "image": "/catalog/weapons/10432.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10422,
+      "name": "格威尔36-斯佩凯芙特",
+      "image": "/catalog/weapons/10422.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10412,
+      "name": "超级90",
+      "image": "/catalog/weapons/10412.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10402,
+      "name": "波波沙冲锋枪",
+      "image": "/catalog/weapons/10402.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10392,
+      "name": "索米",
+      "image": "/catalog/weapons/10392.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10382,
+      "name": "加利尔轻机枪",
+      "image": "/catalog/weapons/10382.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10372,
+      "name": "羽锋",
+      "image": "/catalog/weapons/10372.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10362,
+      "name": "斯捷奇金",
+      "image": "/catalog/weapons/10362.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10352,
+      "name": "九七式",
+      "image": "/catalog/weapons/10352.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10342,
+      "name": "瓦尔特2000",
+      "image": "/catalog/weapons/10342.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10332,
+      "name": "莫辛-纳甘",
+      "image": "/catalog/weapons/10332.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10232,
+      "name": "科夫罗夫",
+      "image": "/catalog/weapons/10232.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10132,
+      "name": "通用冲锋枪9",
+      "image": "/catalog/weapons/10132.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10771,
+      "name": "旧式90型单兵自卫武器",
+      "image": "/catalog/weapons/10771.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10831,
+      "name": "旧式黑棘",
+      "image": "/catalog/weapons/10831.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10821,
+      "name": "旧式格威尔36-康派科特",
+      "image": "/catalog/weapons/10821.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10811,
+      "name": "旧式沙漠之鹰",
+      "image": "/catalog/weapons/10811.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10801,
+      "name": "旧式阿玛莱特15型自动步枪",
+      "image": "/catalog/weapons/10801.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10791,
+      "name": "旧式12型突击步枪",
+      "image": "/catalog/weapons/10791.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10781,
+      "name": "旧式格威尔41",
+      "image": "/catalog/weapons/10781.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10631,
+      "name": "旧式马克二型栓动手枪",
+      "image": "/catalog/weapons/10631.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10731,
+      "name": "旧式夜蛇",
+      "image": "/catalog/weapons/10731.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10761,
+      "name": "旧式特殊模组战术步枪",
+      "image": "/catalog/weapons/10761.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10741,
+      "name": "旧式闪电-3",
+      "image": "/catalog/weapons/10741.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11009,
+      "name": "旧式复仇女神",
+      "image": "/catalog/weapons/11009.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10721,
+      "name": "旧式刘氏步枪",
+      "image": "/catalog/weapons/10721.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10711,
+      "name": "旧式马克23进攻型手枪",
+      "image": "/catalog/weapons/10711.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11054,
+      "name": "旧式格威尔36",
+      "image": "/catalog/weapons/11054.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11051,
+      "name": "旧式九五式",
+      "image": "/catalog/weapons/11051.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11048,
+      "name": "旧式纳甘左轮",
+      "image": "/catalog/weapons/11048.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11045,
+      "name": "旧式特殊用途自动型霰弹枪",
+      "image": "/catalog/weapons/11045.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11042,
+      "name": "旧式一九一式",
+      "image": "/catalog/weapons/11042.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11039,
+      "name": "旧式黑科赫7",
+      "image": "/catalog/weapons/11039.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11036,
+      "name": "旧式卡拉什-阿尔法",
+      "image": "/catalog/weapons/11036.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11030,
+      "name": "旧式罗宾逊先进步枪",
+      "image": "/catalog/weapons/11030.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11024,
+      "name": "旧式佩切涅",
+      "image": "/catalog/weapons/11024.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11022,
+      "name": "旧式野兔",
+      "image": "/catalog/weapons/11022.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11017,
+      "name": "旧式莫洛12",
+      "image": "/catalog/weapons/11017.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11010,
+      "name": "旧式格洛利娅",
+      "image": "/catalog/weapons/11010.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10701,
+      "name": "旧式干预200",
+      "image": "/catalog/weapons/10701.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 11008,
+      "name": "旧式金牛座曲线",
+      "image": "/catalog/weapons/11008.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10691,
+      "name": "旧式因戈尔夫50",
+      "image": "/catalog/weapons/10691.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10681,
+      "name": "旧式樱花冲锋枪",
+      "image": "/catalog/weapons/10681.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10671,
+      "name": "旧式12型双管霰弹枪",
+      "image": "/catalog/weapons/10671.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10661,
+      "name": "旧式卡拉什尼科夫突击步枪15",
+      "image": "/catalog/weapons/10661.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10651,
+      "name": "旧式尼科诺夫突击步枪94",
+      "image": "/catalog/weapons/10651.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10641,
+      "name": "旧式15型自动手枪",
+      "image": "/catalog/weapons/10641.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10621,
+      "name": "旧式刘易斯轻机枪",
+      "image": "/catalog/weapons/10621.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10611,
+      "name": "旧式拉赫蒂26型轻机枪",
+      "image": "/catalog/weapons/10611.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10601,
+      "name": "旧式灰棘",
+      "image": "/catalog/weapons/10601.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10591,
+      "name": "旧式艾奇逊12自动霰弹枪",
+      "image": "/catalog/weapons/10591.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10581,
+      "name": "旧式通用冲锋枪40",
+      "image": "/catalog/weapons/10581.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10571,
+      "name": "旧式柯尔特635型冲锋枪",
+      "image": "/catalog/weapons/10571.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10561,
+      "name": "旧式通用冲锋枪45",
+      "image": "/catalog/weapons/10561.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10551,
+      "name": "旧式维斯卡94",
+      "image": "/catalog/weapons/10551.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10541,
+      "name": "旧式卡宾刻2型",
+      "image": "/catalog/weapons/10541.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10531,
+      "name": "旧式五号九毫米冲锋枪 ",
+      "image": "/catalog/weapons/10531.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10521,
+      "name": "旧式黑克勒科赫416",
+      "image": "/catalog/weapons/10521.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10511,
+      "name": "旧式无壳弹步枪11",
+      "image": "/catalog/weapons/10511.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10501,
+      "name": "旧式长风零六",
+      "image": "/catalog/weapons/10501.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10491,
+      "name": "旧式施泰尔冲锋手枪",
+      "image": "/catalog/weapons/10491.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10481,
+      "name": "旧式九七式霰",
+      "image": "/catalog/weapons/10481.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10471,
+      "name": "旧式斯普林菲尔德",
+      "image": "/catalog/weapons/10471.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10451,
+      "name": "旧式格威尔28",
+      "image": "/catalog/weapons/10451.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10441,
+      "name": "旧式短剑",
+      "image": "/catalog/weapons/10441.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10431,
+      "name": "旧式斯柯达75",
+      "image": "/catalog/weapons/10431.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10421,
+      "name": "旧式格威尔36-斯佩凯芙特",
+      "image": "/catalog/weapons/10421.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10411,
+      "name": "旧式超级90",
+      "image": "/catalog/weapons/10411.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10401,
+      "name": "旧式波波沙冲锋枪",
+      "image": "/catalog/weapons/10401.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10391,
+      "name": "旧式索米",
+      "image": "/catalog/weapons/10391.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10381,
+      "name": "旧式加利尔轻机枪",
+      "image": "/catalog/weapons/10381.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10371,
+      "name": "旧式羽锋",
+      "image": "/catalog/weapons/10371.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10361,
+      "name": "旧式斯捷奇金",
+      "image": "/catalog/weapons/10361.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10351,
+      "name": "旧式九七式",
+      "image": "/catalog/weapons/10351.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10341,
+      "name": "旧式瓦尔特2000",
+      "image": "/catalog/weapons/10341.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10331,
+      "name": "旧式莫辛-纳甘",
+      "image": "/catalog/weapons/10331.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10231,
+      "name": "旧式科夫罗夫",
+      "image": "/catalog/weapons/10231.png",
+      "sourceUrl": ""
+    },
+    {
+      "id": 10131,
+      "name": "旧式通用冲锋枪9",
+      "image": "/catalog/weapons/10131.png",
+      "sourceUrl": ""
+    }
+  ]
+}
