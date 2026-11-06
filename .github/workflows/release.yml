@@ -1,0 +1,55 @@
+# Publishes Griffin-GM-Tools.exe (+ .sha256) on every push to main. Running copies of GM Tools
+# check this repo's latest release and replace themselves when a newer version appears.
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      VERSION: 1.2.${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Build
+        shell: pwsh
+        env:
+          # Baked into the exe: the self-updater compares it with the latest release tag.
+          GRIFFIN_BUILD_VERSION: ${{ env.VERSION }}
+        run: |
+          npm ci
+          npm run tauri:build
+          New-Item -ItemType Directory out | Out-Null
+          Copy-Item src-tauri/target/release/griffin-gm-tools.exe out/Griffin-GM-Tools.exe
+          $hash = (Get-FileHash out/Griffin-GM-Tools.exe -Algorithm SHA256).Hash.ToLower()
+          Set-Content out/Griffin-GM-Tools.exe.sha256 "$hash  Griffin-GM-Tools.exe" -NoNewline -Encoding ascii
+
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $notes = git log -1 --pretty=format:'%s'
+          gh release create "v$env:VERSION" out/Griffin-GM-Tools.exe out/Griffin-GM-Tools.exe.sha256 `
+            --title "Griffin GM Tools $env:VERSION" --notes "$notes" --latest
