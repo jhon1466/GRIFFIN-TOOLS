@@ -552,33 +552,23 @@ async fn install_patcher_files(app: &AppHandle, rel: &Release) -> Result<bool, S
     Ok(true)
 }
 
-/// Copies the patcher into the game folder through an elevated PowerShell (one UAC prompt),
-/// keeping the old daiyan.dll / launcher.exe as .old like scripts/install-griffin-patcher.ps1.
+/// Copies the patcher into the game folder, keeping the old daiyan.dll / launcher.exe as .old like
+/// scripts/install-griffin-patcher.ps1. GM Tools always runs as administrator (app.manifest), so
+/// Program Files is writable without another prompt.
 fn copy_patcher_to_game(game_dir: &str) -> Result<(), String> {
     let game = Path::new(game_dir);
     if !game.join("GF2_Exilium.exe").exists() {
         return Err("En esa carpeta no está GF2_Exilium.exe.".into());
     }
-    let src = p("patcher");
-    let script = format!(
-        "$ErrorActionPreference='Stop'; \
-         Copy-Item -LiteralPath '{s}\\griffin_patcher.dll','{s}\\griffin_launcher.exe' -Destination '{g}' -Force; \
-         foreach ($o in 'daiyan.dll','launcher.exe') {{ $f = Join-Path '{g}' $o; if (Test-Path $f) {{ Move-Item $f \"$f.old\" -Force }} }}",
-        s = src.display().to_string().replace('\'', "''"),
-        g = game_dir.replace('\'', "''")
-    );
-    let status = hidden(Command::new("powershell").args([
-        "-NoProfile",
-        "-Command",
-        &format!(
-            "Start-Process powershell -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList '-NoProfile','-Command',\"{}\"",
-            script.replace('"', "`\"")
-        ),
-    ]))
-    .status()
-    .map_err(e)?;
-    if !status.success() || !game.join("griffin_launcher.exe").exists() {
-        return Err("No se copió el parche (¿se canceló el permiso de administrador?).".into());
+    for name in ["griffin_patcher.dll", "griffin_launcher.exe"] {
+        fs::copy(p("patcher").join(name), game.join(name))
+            .map_err(|x| format!("No se pudo copiar {name} a la carpeta del juego: {x}"))?;
+    }
+    for old in ["daiyan.dll", "launcher.exe"] {
+        let f = game.join(old);
+        if f.exists() {
+            let _ = fs::rename(&f, game.join(format!("{old}.old")));
+        }
     }
     Ok(())
 }
@@ -789,23 +779,12 @@ pub fn manager_play() -> Result<(), String> {
     if !launcher.exists() {
         return Err("El parche no está en la carpeta del juego. Pulsa «Instalar parche».".into());
     }
-    // griffin_launcher.exe must run as administrator.
-    let status = hidden(Command::new("powershell").args([
-        "-NoProfile",
-        "-Command",
-        &format!(
-            "Start-Process -FilePath '{}' -WorkingDirectory '{}' -Verb RunAs",
-            launcher.display().to_string().replace('\'', "''"),
-            dir.replace('\'', "''")
-        ),
-    ]))
-    .status()
-    .map_err(e)?;
-    if status.success() {
-        Ok(())
-    } else {
-        Err("No se pudo abrir el juego (¿se canceló el permiso de administrador?).".into())
-    }
+    // GM Tools is elevated, so the launcher inherits administrator rights.
+    Command::new(&launcher)
+        .current_dir(&dir)
+        .spawn()
+        .map(|_| ())
+        .map_err(|x| format!("No se pudo abrir el juego: {x}"))
 }
 
 #[tauri::command]
