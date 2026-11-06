@@ -6,7 +6,9 @@ use std::net::IpAddr;
 use tauri::State;
 use url::Url;
 
-const GM_TOKEN_TARGET: &str = "Griffin.GMTools.AdminToken";
+mod manager;
+
+pub(crate) const GM_TOKEN_TARGET: &str = "Griffin.GMTools.AdminToken";
 
 #[tauri::command]
 fn save_gm_token(token: String) -> Result<(), String> {
@@ -27,7 +29,7 @@ fn load_saved_gm_token() -> Result<Option<String>, String> {
 }
 
 #[cfg(windows)]
-mod credential_store {
+pub(crate) mod credential_store {
     use std::{ffi::c_void, mem::zeroed, ptr};
 
     #[repr(C)]
@@ -146,7 +148,7 @@ mod credential_store {
 }
 
 #[cfg(not(windows))]
-mod credential_store {
+pub(crate) mod credential_store {
     pub fn write(_: &str, _: &[u8]) -> Result<(), String> {
         Err("El almacenamiento seguro solo está disponible en Windows.".into())
     }
@@ -282,13 +284,34 @@ pub fn run() {
 
     tauri::Builder::default()
         .manage(GmHttp(http))
+        .manage(manager::Manager::default())
+        .setup(|app| {
+            manager::spawn_auto_updater(app.handle().clone());
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             gm_request,
             save_gm_token,
-            load_saved_gm_token
+            load_saved_gm_token,
+            manager::manager_status,
+            manager::manager_update,
+            manager::manager_start,
+            manager::manager_stop,
+            manager::manager_set_settings,
+            manager::manager_set_game_dir,
+            manager::manager_play,
+            manager::manager_log_tail,
+            manager::manager_open_folder,
+            manager::manager_saved_token
         ])
-        .run(tauri::generate_context!())
-        .expect("error while running Griffin GM Tools");
+        .build(tauri::generate_context!())
+        .expect("error while building Griffin GM Tools")
+        .run(|app, event| {
+            if let tauri::RunEvent::Exit = event {
+                use tauri::Manager;
+                manager::shutdown(&app.state::<manager::Manager>());
+            }
+        });
 }
 
 fn main() {
