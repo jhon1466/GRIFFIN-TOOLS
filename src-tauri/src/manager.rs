@@ -411,6 +411,40 @@ fn server_running(m: &Manager) -> bool {
     }
 }
 
+const HTTPS_CERT_PASSWORD: &str = "griffin";
+
+/// Kestrel's HTTPS endpoint needs a certificate. PCs without the .NET SDK have no developer
+/// certificate, so the server died at startup ("Unable to configure HTTPS endpoint"). Create a
+/// self-signed one for localhost once and hand it to the server explicitly.
+fn ensure_https_cert() -> Result<std::path::PathBuf, String> {
+    let pfx = p("https.pfx");
+    if pfx.exists() {
+        return Ok(pfx);
+    }
+    let script = format!(
+        "$ErrorActionPreference='Stop'; \
+         $c = New-SelfSignedCertificate -DnsName 'localhost','127.0.0.1' -CertStoreLocation 'Cert:\\CurrentUser\\My' -NotAfter (Get-Date).AddYears(20) -KeyExportPolicy Exportable -FriendlyName 'Griffin Server'; \
+         $pw = ConvertTo-SecureString '{HTTPS_CERT_PASSWORD}' -AsPlainText -Force; \
+         Export-PfxCertificate -Cert $c -FilePath '{}' -Password $pw | Out-Null; \
+         Remove-Item -Path ('Cert:\\CurrentUser\\My\\' + $c.Thumbprint)",
+        pfx.display().to_string().replace('\'', "''")
+    );
+    let out = hidden(
+        Command::new("powershell")
+            .args(["-NoProfile", "-NonInteractive", "-Command", &script])
+            .stdin(Stdio::null()),
+    )
+    .output()
+    .map_err(|x| format!("No se pudo crear el certificado HTTPS: {x}"))?;
+    if !out.status.success() || !pfx.exists() {
+        return Err(format!(
+            "No se pudo crear el certificado HTTPS: {}",
+            String::from_utf8_lossy(&out.stderr).trim()
+        ));
+    }
+    Ok(pfx)
+}
+
 async fn start_server_inner(app: &AppHandle, m: &Manager) -> Result<(), String> {
     if server_running(m) {
         return Ok(());
@@ -433,6 +467,7 @@ async fn start_server_inner(app: &AppHandle, m: &Manager) -> Result<(), String> 
     ensure_postgres(app).await?;
     let settings = load_settings();
     let token = gm_token()?;
+    let cert = ensure_https_cert()?;
     fs::create_dir_all(p("logs")).map_err(e)?;
     let log = fs::File::create(p("logs").join("server.log")).map_err(e)?;
     let child = hidden(
@@ -444,6 +479,8 @@ async fn start_server_inner(app: &AppHandle, m: &Manager) -> Result<(), String> 
             )
             .env("GameServer__Host", &settings.public_host)
             .env("GRIFFIN_GM_TOKEN", token)
+            .env("Kestrel__Certificates__Default__Path", &cert)
+            .env("Kestrel__Certificates__Default__Password", HTTPS_CERT_PASSWORD)
             .stdout(log.try_clone().map_err(e)?)
             .stderr(log)
             .stdin(Stdio::null()),
@@ -451,6 +488,23 @@ async fn start_server_inner(app: &AppHandle, m: &Manager) -> Result<(), String> 
     .spawn()
     .map_err(|x| format!("No se pudo iniciar Griffin.exe: {x}"))?;
     *m.server.lock().unwrap() = Some(child);
+    // A server that fails during startup exits within a few seconds; report why instead of
+    // claiming success and leaving the UI with an empty connection error.
+    tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+    if !server_running(m) {
+        let log = fs::read_to_string(p("logs").join("server.log")).unwrap_or_default();
+        let reason = log
+            .lines()
+            .find(|l| l.contains("Exception:"))
+            .or_else(|| log.lines().rev().find(|l| !l.trim().is_empty()))
+            .unwrap_or("sin detalles")
+            .trim()
+            .to_string();
+        return Err(format!(
+            "El servidor se cerró al iniciar: {reason}\nRevisa {}",
+            p("logs").join("server.log").display()
+        ));
+    }
     progress(app, "server", 100.0, "Servidor iniciado.");
     Ok(())
 }
