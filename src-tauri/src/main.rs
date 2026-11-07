@@ -257,7 +257,9 @@ fn is_allowed_route(method: &Method, path: &str) -> bool {
         (&Method::GET, ["status"])
         | (&Method::GET, ["accounts"])
         | (&Method::GET, ["commands"])
-        | (&Method::GET, ["catalog"]) => true,
+        | (&Method::GET, ["catalog"])
+        | (&Method::GET, ["events"]) => true,
+        (&Method::POST, ["events", id]) | (&Method::DELETE, ["events", id]) => id.parse::<u32>().is_ok_and(|v| v > 0),
         (&Method::GET, ["accounts", uid]) => uid.parse::<u32>().is_ok_and(|id| id > 0),
         (&Method::DELETE, ["accounts", uid]) => uid.parse::<u32>().is_ok_and(|id| id > 0),
         (&Method::POST, ["commands"]) => true,
@@ -346,6 +348,10 @@ mod tests {
         assert!(is_allowed_route(&Method::POST, "accounts/123/weapons"));
         assert!(is_allowed_route(&Method::POST, "accounts/123/costumes"));
         assert!(is_allowed_route(&Method::POST, "accounts/123/weapon-skins"));
+        assert!(is_allowed_route(&Method::GET, "events"));
+        assert!(is_allowed_route(&Method::POST, "events/61810"));
+        assert!(is_allowed_route(&Method::DELETE, "events/61810"));
+        assert!(!is_allowed_route(&Method::POST, "events/abc"));
         assert!(is_allowed_route(
             &Method::POST,
             "accounts/123/inventory/add-all"

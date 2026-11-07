@@ -1,7 +1,7 @@
 import { For, Show, createMemo, createSignal, onCleanup, onMount, type JSX } from 'solid-js';
 import { invoke } from '@tauri-apps/api/core';
 import {
-  Activity, ArrowDownToLine, ArrowRight, Boxes, Check, CircleHelp, Command, Database,
+  Activity, ArrowDownToLine, CalendarDays, ArrowRight, Boxes, Check, CircleHelp, Command, Database,
   Gauge, Gift, LayoutDashboard, LoaderCircle, LogOut, Package, Plus, RefreshCw,
   Search, Server, ShieldCheck, TerminalSquare, Trash2, Users, Wifi, X, Zap,
 } from 'lucide-solid';
@@ -9,7 +9,8 @@ import { copy, type Language } from '../i18n';
 import gmCatalogUrl from '../data/gm-catalog.json?url';
 import ServerPanel from './ServerPanel';
 
-type Tab = 'server' | 'overview' | 'accounts' | 'operations' | 'commands';
+type Tab = 'server' | 'overview' | 'accounts' | 'operations' | 'events' | 'commands';
+type GameEvent = { id: number; type: number; name: string; icon: string; officialOpen: number; officialClose: number; open: number | null; close: number | null };
 type Account = { uid: number; email: string; isGuest: boolean; timeLastLogin: string; selected?: boolean };
 type ServerStatus = { uptimeSeconds: number; database: string; accounts: number | null; online: number };
 type GameCommand = { name: string; description: string; usage: string };
@@ -20,6 +21,7 @@ const routeDefs: { id: Tab; key: keyof typeof copy.es; icon: typeof LayoutDashbo
   { id: 'overview', key: 'navOverview', icon: LayoutDashboard },
   { id: 'accounts', key: 'navAccounts', icon: Users },
   { id: 'operations', key: 'navOperations', icon: Boxes },
+  { id: 'events', key: 'navEvents', icon: CalendarDays },
   { id: 'commands', key: 'navCommands', icon: TerminalSquare },
 ];
 type LocalCatalog = { characters: CatalogEntry[]; weapons: CatalogEntry[]; items: CatalogEntry[]; costumes: CatalogEntry[]; weaponSkins: CatalogEntry[] };
@@ -58,6 +60,20 @@ export default function GMApp() {
   const [chosenCostumes, setChosenCostumes] = createSignal<number[]>([]);
   const [chosenSkins, setChosenSkins] = createSignal<number[]>([]);
   const [cleanUid, setCleanUid] = createSignal('');
+  const [events, setEvents] = createSignal<GameEvent[]>([]);
+  const [eventQuery, setEventQuery] = createSignal('');
+  const [eventOnlyOpen, setEventOnlyOpen] = createSignal(false);
+  const [eventDays, setEventDays] = createSignal('14');
+  const shownEvents = createMemo(() => {
+    const q = eventQuery().trim().toLowerCase();
+    return events()
+      .filter((e) => !eventOnlyOpen() || e.open !== null)
+      .filter((e) => !q || e.name.toLowerCase().includes(q) || String(e.id) === q)
+      .slice()
+      .reverse()
+      .slice(0, 200);
+  });
+  const day = (seconds: number) => (seconds ? new Date(seconds * 1000).toISOString().slice(0, 10) : '—');
   const [cleanType, setCleanType] = createSignal('items');
   let poller: number | undefined;
   let noticeTimer: number | undefined;
@@ -91,6 +107,30 @@ export default function GMApp() {
     setNotice({ text, error });
     if (noticeTimer) window.clearTimeout(noticeTimer);
     noticeTimer = window.setTimeout(() => setNotice(undefined), 4600);
+  }
+
+  async function loadEvents() {
+    setBusy(true);
+    try { setEvents(await request<GameEvent[]>('GET', 'events')); }
+    catch (error) { notify(String(error), true); }
+    finally { setBusy(false); }
+  }
+
+  async function toggleEvent(event: GameEvent) {
+    setBusy(true);
+    try {
+      if (event.open !== null) {
+        await request('DELETE', `events/${event.id}`);
+        notify(`${t('eventsClosed')}: ${event.id}`);
+      } else {
+        const days = Math.min(3650, Math.max(1, Number.parseInt(eventDays(), 10) || 14));
+        await request('POST', `events/${event.id}`, { days });
+        notify(`${t('eventsOpened')}: ${event.id}`);
+      }
+      setLastAction(`${event.id} · ${event.name}`);
+      setEvents(await request<GameEvent[]>('GET', 'events'));
+    } catch (error) { notify(String(error), true); }
+    finally { setBusy(false); }
   }
 
   async function refreshStatus() {
@@ -281,6 +321,7 @@ export default function GMApp() {
             <form class="surface-card operation-card danger-card" onSubmit={cleanInventory}><OperationHeading icon={Trash2} title={t('resetAmounts')} subtitle={t('resetHint')} number="04" tone="rose"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={cleanUid()} onInput={(e) => setCleanUid(e.currentTarget.value)}/></Field><Field label={t('group')}><select class="input-field" value={cleanType()} onChange={(e) => setCleanType(e.currentTarget.value)}><option value="items">{t('allItems')}</option><option value="resources">{t('resources')}</option></select></Field><button class="danger-button mt-4 w-full" disabled={!connected() || busy()}><Trash2 size={15}/>{t('resetButton')}</button></form>
           </div><Show when={notice()}>{(n) => <div class={`result-banner mt-4 ${n().error ? 'error-banner' : ''}`}><Check size={15}/><span>{n().text}</span></div>}</Show></Show>
 
+          <Show when={tab() === 'events'}><div class="mb-5 flex items-end justify-between"><div><h2 class="section-title">{t('eventsTitle')}</h2><p class="section-subtitle">{t('eventsHint')}</p></div><button class="quiet-button" disabled={!connected() || busy()} onClick={() => void loadEvents()}><RefreshCw size={14}/> {t('eventsLoad')}</button></div><section class="surface-card p-5"><div class="mb-4 flex items-center gap-3"><label class="search-field"><Search size={14}/><input placeholder={t('eventsSearch')} value={eventQuery()} onInput={(e) => setEventQuery(e.currentTarget.value)}/></label><label class="flex items-center gap-2 text-[12px] text-ice-300"><input type="checkbox" checked={eventOnlyOpen()} onChange={(e) => setEventOnlyOpen(e.currentTarget.checked)}/>{t('eventsOnlyOpen')}</label><label class="flex items-center gap-2 text-[12px] text-ice-300">{t('eventsDays')}<input class="input-field w-20" value={eventDays()} onInput={(e) => setEventDays(e.currentTarget.value)}/></label></div><Show when={shownEvents().length > 0} fallback={<div class="empty-log"><CalendarDays size={18}/><span>{events().length ? t('eventsNone') : t('eventsLoad')}</span></div>}><div class="max-h-[560px] overflow-y-auto"><For each={shownEvents()}>{(event) => <div class="flex items-center gap-3 border-t border-white/[0.06] py-3"><div class="min-w-0 flex-1"><div class="text-[13px] font-semibold">{event.name || '—'} <span class="text-ice-500">#{event.id}</span></div><div class="mt-1 text-[11px] text-ice-500">{t('eventsType')} {event.type} · {t('eventsOfficial')}: {day(event.officialOpen)} → {day(event.officialClose)}<Show when={event.open !== null}> · <span class="text-aqua-300">{t('eventsUntil')} {day(event.close ?? 0)}</span></Show></div></div><button class={event.open !== null ? 'quiet-button' : 'primary-button'} disabled={busy()} onClick={() => void toggleEvent(event)}>{event.open !== null ? t('eventsClose') : t('eventsOpen')}</button></div>}</For></div></Show></section></Show>
           <Show when={tab() === 'commands'}><div class="mb-5"><h2 class="section-title">{t('permittedCommands')}</h2><p class="section-subtitle">{t('commandHint')}</p></div><div class="grid grid-cols-[.8fr_1.2fr] gap-4"><section class="surface-card overflow-hidden"><div class="border-b border-white/[0.06] p-4"><h3 class="card-title">{t('commandRegistry')}</h3><p class="card-caption">{t('noShell')}</p></div><div class="max-h-[500px] overflow-auto"><Show when={commands().length} fallback={<div class="empty-state">{connected() ? t('noCommands') : t('connectLoad')}</div>}><For each={commands()}>{(cmd) => <button class="command-row" onClick={() => setCommandText(cmd.usage || cmd.name)}><span class="command-mark"><Command size={15}/></span><span class="min-w-0 flex-1 text-left"><b>{cmd.name}</b><small>{cmd.description}</small></span><ArrowRight size={14} class="text-ice-500"/></button>}</For></Show></div></section><section class="surface-card p-5"><div class="mb-4 flex items-center justify-between"><div><h3 class="card-title">{t('console')}</h3><p class="card-caption">{t('argsValidated')}</p></div><span class="tiny-chip"><TerminalSquare size={12}/> GM CONSOLE</span></div><form onSubmit={executeCommand}><div class="command-input-wrap"><span class="text-aqua-300">griffin</span><span class="text-ice-500">›</span><input value={commandText()} onInput={(e) => setCommandText(e.currentTarget.value)} placeholder={t('commandPlaceholder')}/></div><button class="primary-button mt-3" disabled={!connected() || busy()}><Command size={15}/>{t('execute')}</button></form><div class="mt-5"><div class="mb-2 text-[10px] font-bold uppercase tracking-widest text-ice-500">{t('output')}</div><pre class="command-output">{commandResult() || t('outputPlaceholder')}</pre></div></section></div></Show>
         </div>
         <footer class="flex h-9 shrink-0 items-center justify-between border-t border-white/[0.06] px-8 text-[10px] text-ice-500"><span class="flex items-center gap-2"><span class={`status-dot ${connected() ? 'online' : ''}`}></span>{connected() ? t('activeChannel') : t('inactiveChannel')} <span class="text-white/15">/</span> {t('loopback')}</span><span class="flex items-center gap-1.5"><ShieldCheck size={12}/>{t('protectedBy')}</span></footer>
