@@ -2,6 +2,7 @@ export type Language = 'es' | 'en' | 'zh';
 
 export const copy = {
   es: {
+    eventsExperimental: 'Función experimental y todavía incompleta: algunos eventos pueden no funcionar bien, no dar sus recompensas o mostrar errores. Se seguirá completando más adelante.',
     navEvents: 'Eventos', eventsTitle: 'Eventos del juego', eventsHint: 'Abre cualquier evento que haya salido. Cada evento abierto dura los días que elijas; vuelve a entrar al juego para verlo.', eventsSearch: 'Buscar por nombre o ID', eventsOnlyOpen: 'Solo abiertos', eventsDays: 'Días', eventsOpen: 'Abrir', eventsClose: 'Cerrar', eventsOpened: 'Evento abierto', eventsClosed: 'Evento devuelto a sus fechas oficiales', eventsType: 'Tipo', eventsOfficial: 'Fechas oficiales', eventsUntil: 'Abierto hasta', eventsLoad: 'Cargar eventos', eventsNone: 'Sin eventos para esta búsqueda.',
     navServer: 'Servidor local',
     language: 'Idioma', navOverview: 'Resumen', navAccounts: 'Cuentas', navOperations: 'Operaciones GM', navCommands: 'Comandos', workspace: 'Espacio de trabajo', server: 'Servidor', disconnected: 'Desconectado', liveConsole: 'Consola en vivo', waitingServer: 'Esperando servidor', secureLink: 'Enlace seguro',
@@ -17,6 +18,7 @@ export const copy = {
     activeChannel: 'Canal administrativo activo', inactiveChannel: 'Canal administrativo inactivo', loopback: 'Solo loopback', protectedBy: 'Protegido por Griffin', localBuild: 'GRIFFIN · BUILD LOCAL', account: 'Cuenta', guestAccount: 'Cuenta de invitado', searchAccountHint: 'Busca una cuenta para ver sus datos.', queryRefresh: 'Actualizar', search: 'Buscar',
   },
   en: {
+    eventsExperimental: 'Experimental and still incomplete: some events may not work properly, may not give their rewards or may show errors. It will be completed later.',
     navEvents: 'Events', eventsTitle: 'Game events', eventsHint: 'Open any event the game has released. Each opened event lasts the days you choose; log in again to see it.', eventsSearch: 'Search by name or ID', eventsOnlyOpen: 'Only open', eventsDays: 'Days', eventsOpen: 'Open', eventsClose: 'Close', eventsOpened: 'Event opened', eventsClosed: 'Event back to its official dates', eventsType: 'Type', eventsOfficial: 'Official dates', eventsUntil: 'Open until', eventsLoad: 'Load events', eventsNone: 'No events for this search.',
     navServer: 'Local server',
     language: 'Language', navOverview: 'Overview', navAccounts: 'Accounts', navOperations: 'GM Operations', navCommands: 'Commands', workspace: 'Workspace', server: 'Server', disconnected: 'Disconnected', liveConsole: 'Live console', waitingServer: 'Waiting for server', secureLink: 'Secure link',
@@ -32,6 +34,7 @@ export const copy = {
     activeChannel: 'Admin channel active', inactiveChannel: 'Admin channel inactive', loopback: 'Loopback only', protectedBy: 'Protected by Griffin', localBuild: 'GRIFFIN · LOCAL BUILD', account: 'Account', guestAccount: 'Guest account', searchAccountHint: 'Search for an account to view its data.', queryRefresh: 'Refresh', search: 'Search',
   },
   zh: {
+    eventsExperimental: '实验性功能，尚未完成：部分活动可能无法正常运行、无法发放奖励或出现错误。后续将继续完善。',
     navEvents: '活动', eventsTitle: '游戏活动', eventsHint: '开启任意已上线的活动，持续所选天数；重新登录游戏后可见。', eventsSearch: '按名称或 ID 搜索', eventsOnlyOpen: '仅已开启', eventsDays: '天数', eventsOpen: '开启', eventsClose: '关闭', eventsOpened: '活动已开启', eventsClosed: '活动已恢复官方时间', eventsType: '类型', eventsOfficial: '官方时间', eventsUntil: '开启至', eventsLoad: '加载活动', eventsNone: '没有符合的活动。',
     navServer: '本地服务器',
     language: '语言', navOverview: '总览', navAccounts: '账号', navOperations: 'GM 操作', navCommands: '命令', workspace: '工作区', server: '服务器', disconnected: '未连接', liveConsole: '实时控制台', waitingServer: '等待服务器', secureLink: '安全连接',
