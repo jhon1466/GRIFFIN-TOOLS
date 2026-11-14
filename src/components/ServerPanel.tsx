@@ -43,6 +43,16 @@ const text = {
     patched: '补丁已安装', unpatched: '补丁未安装', log: '服务器日志', folder: '打开目录',
     diag: '复制诊断信息', copied: '已复制', ports: '端口被其他程序占用：', saved: '已保存',
   },
+  ja: {
+    title: 'ローカルサーバー', hint: 'ビルド不要でGriffinをインストール・起動し、最新の状態に保ちます。',
+    running: '稼働中', stopped: '停止中', notInstalled: '未インストール', install: 'すべてインストール', update: '更新を確認',
+    start: 'サーバー起動', stop: '停止', version: 'サーバーのバージョン', app: 'GM Toolsのバージョン', db: 'データベース',
+    auto: '更新を自動でインストール', host: 'プレイヤーの接続先アドレス',
+    hostHint: '127.0.0.1 = このPCのみ。LANで遊ぶ場合はこのPCのIPを入力してください。', save: '保存',
+    game: 'ゲーム', gameDir: 'GF2フォルダ（GF2_Exilium.exe がある場所）', patch: 'パッチをインストール', play: 'プレイ',
+    patched: 'パッチ適用済み', unpatched: 'パッチ未適用', log: 'サーバーログ', folder: 'フォルダを開く',
+    diag: '診断情報をコピー', copied: '診断情報をコピーしました', ports: '他のプログラムが使用中のポート：', saved: '保存しました',
+  },
 };
 
 export default function ServerPanel(props: { language: Language; onStarted: () => void; notify: (m: string, error?: boolean) => void }) {

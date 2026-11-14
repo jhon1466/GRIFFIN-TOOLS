@@ -74,7 +74,7 @@ export default function GMApp() {
       .slice(0, 200);
   });
   // the name in the language of the app (English/Spanish come from the global client), the Chinese one as a hint
-  const eventTitle = (e: GameEvent) => (language() === 'es' ? e.nameEs || e.nameEn : language() === 'en' ? e.nameEn || e.nameEs : '') || e.name || '—';
+  const eventTitle = (e: GameEvent) => (language() === 'es' ? e.nameEs || e.nameEn : language() === 'en' || language() === 'ja' ? e.nameEn || e.nameEs : '') || e.name || '—';
   const day = (seconds: number) => (seconds ? new Date(seconds * 1000).toISOString().slice(0, 10) : '—');
   const [cleanType, setCleanType] = createSignal('items');
   let poller: number | undefined;
@@ -291,7 +291,7 @@ export default function GMApp() {
       if (saved) setToken(saved);
     }).catch(() => undefined);
     const savedLanguage = localStorage.getItem('griffin-gm-language');
-    if (savedLanguage === 'es' || savedLanguage === 'en' || savedLanguage === 'zh') setLanguage(savedLanguage);
+    if (savedLanguage === 'es' || savedLanguage === 'en' || savedLanguage === 'zh' || savedLanguage === 'ja') setLanguage(savedLanguage);
     void fetch(gmCatalogUrl).then((response) => {
       if (!response.ok) throw new Error(`Catalog file returned ${response.status}`);
       return response.json() as Promise<LocalCatalog>;
@@ -307,7 +307,7 @@ export default function GMApp() {
           <div class="brand-mark grid size-12 place-items-center rounded-xl border border-white/10 bg-[#252a2e] p-1 shadow-[0_0_28px_#f2762b25]"><img src="/griffin-logo.png" alt="Elmo CE" class="h-full w-full object-contain" /></div>
           <div><div class="text-[15px] font-black tracking-[.22em]">GRIFFIN</div><div class="mt-0.5 text-[10px] font-semibold tracking-[.28em] text-aqua-300">GM CONTROL</div></div>
         </div>
-        <div class="mb-2 flex items-center justify-between px-3 text-[10px] font-bold uppercase tracking-[.2em] text-ice-500"><span>{t('workspace')}</span><select aria-label={t('language')} class="language-select" value={language()} onChange={(e) => { const next = e.currentTarget.value as Language; setLanguage(next); localStorage.setItem('griffin-gm-language', next); }}><option value="es">ES</option><option value="en">EN</option><option value="zh">中文</option></select></div>
+        <div class="mb-2 flex items-center justify-between px-3 text-[10px] font-bold uppercase tracking-[.2em] text-ice-500"><span>{t('workspace')}</span><select aria-label={t('language')} class="language-select" value={language()} onChange={(e) => { const next = e.currentTarget.value as Language; setLanguage(next); localStorage.setItem('griffin-gm-language', next); }}><option value="es">ES</option><option value="en">EN</option><option value="zh">中文</option><option value="ja">日本語</option></select></div>
         <nav class="flex flex-col gap-1"><For each={routeDefs}>{(route) => { const Icon = route.icon; return <button onClick={() => setTab(route.id)} class={`nav-item group flex h-11 items-center gap-3 rounded-lg px-3 text-left text-[13px] font-semibold transition ${tab() === route.id ? 'active-nav' : 'text-ice-300 hover:bg-white/[0.045] hover:text-white'}`}><Icon size={17} strokeWidth={1.8}/><span>{t(route.key)}</span><Show when={tab() === route.id}><ArrowRight class="ml-auto text-aqua-300" size={15}/></Show></button>; }}</For></nav>
         <div class="mt-8 mb-2 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-ice-500">{t('server')}</div>
         <div class="mx-1 rounded-xl border border-white/[0.07] bg-white/[0.025] p-3"><div class="flex items-center gap-2 text-xs font-semibold"><span class={`status-dot ${connected() ? 'online' : ''}`}></span>{connected() ? 'Griffin local' : t('disconnected')}</div><div class="mt-2 truncate pl-4 text-[11px] text-ice-500">{address().replace('https://', '')}</div></div>
@@ -394,7 +394,7 @@ function normalizeCatalogQuery(value: string) {
 }
 
 function catalogName(entry: CatalogEntry, locale: Language) {
-  return entry.names?.[locale as 'en' | 'es'] || (locale === 'es' ? entry.names?.en : undefined) || entry.name;
+  return entry.names?.[locale as 'en' | 'es'] || (locale === 'es' || locale === 'ja' ? entry.names?.en : undefined) || entry.name;
 }
 
 function catalogSearchText(entry: CatalogEntry) {
