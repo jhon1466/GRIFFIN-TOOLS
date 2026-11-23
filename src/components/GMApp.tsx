@@ -3,11 +3,23 @@ import { invoke } from '@tauri-apps/api/core';
 import {
   Activity, ArrowDownToLine, CalendarDays, ArrowRight, Boxes, Check, CircleHelp, Command, Database,
   Gauge, Gift, LayoutDashboard, LoaderCircle, LogOut, Package, Plus, RefreshCw,
-  Search, Server, ShieldCheck, TerminalSquare, Trash2, Users, Wifi, X, Zap,
+  Search, Server, ShieldCheck, TerminalSquare, Trash2, Users, Wifi, X, Zap, Wrench,
 } from 'lucide-solid';
 import { copy, type Language } from '../i18n';
 import gmCatalogUrl from '../data/gm-catalog.json?url';
+import traitMapping from '../data/trait_mapping.json';
 import ServerPanel from './ServerPanel';
+
+type TraitMeta = {
+  name: string; category: string; type?: number; group?: number;
+  maxLevel?: number; levels?: string[]; description?: string;
+  element?: string; stat?: string; scaling?: string; dps?: boolean;
+};
+const traitMap = traitMapping as unknown as Record<string, TraitMeta>;
+const CATEGORY_NAMES = ['', 'Bulwark', 'Vanguard', 'Support', 'Sentinel'];
+// trait_mapping.json is keyed by group id; full entry ids encode group * 100 + level
+const mappedTrait = (id: number): TraitMeta | undefined =>
+  traitMap[String(id)] ?? traitMap[String(Math.floor(id / 100))];
 
 type Tab = 'server' | 'overview' | 'accounts' | 'operations' | 'events' | 'commands';
 type GameEvent = { id: number; type: number; name: string; icon: string; officialOpen: number; officialClose: number; open: number | null; close: number | null; nameEn?: string; nameEs?: string };
@@ -15,6 +27,9 @@ type Account = { uid: number; email: string; isGuest: boolean; timeLastLogin: st
 type ServerStatus = { uptimeSeconds: number; database: string; accounts: number | null; online: number };
 type GameCommand = { name: string; description: string; usage: string };
 type CatalogEntry = { id: number; gunId?: number; weaponId?: number; default?: boolean; name: string; displayName?: string; names?: Partial<Record<'en' | 'es', string>>; aliases?: string[]; image?: string };
+type TraitPlugin = { pluginId: number; stcId: number; row: number | null; type: number; rank: number; gunId: number; locked: boolean; entries: number[]; traits: { id: number; level: number; type: number }[] };
+type TraitEntry = { id: number; name: string; type: number; group: number; level: number; value: number; };
+type SlotData = { slot: number; coreId: number | null; stcId?: number | null; type?: number | null; pluginId: string | null; editable: boolean; traits: { id: number; level: number; name?: string }[] };
 
 const routeDefs: { id: Tab; key: keyof typeof copy.es; icon: typeof LayoutDashboard }[] = [
   { id: 'server', key: 'navServer', icon: Server },
@@ -29,7 +44,11 @@ const emptyCatalog: LocalCatalog = { characters: [], weapons: [], items: [], cos
 
 export default function GMApp() {
   const [language, setLanguage] = createSignal<Language>('es');
-  const t = (key: keyof typeof copy.es) => copy[language()][key];
+  const t = (key: keyof typeof copy.es, params?: Record<string, string | number>) => {
+    let text = copy[language()][key] ?? copy.en[key] ?? String(key);
+    if (params) for (const [name, value] of Object.entries(params)) text = text.replaceAll(`{${name}}`, String(value));
+    return text;
+  };
   const [tab, setTab] = createSignal<Tab>('server');
   const [address, setAddress] = createSignal('https://127.0.0.1');
   const [token, setToken] = createSignal('');
@@ -53,6 +72,7 @@ export default function GMApp() {
   const [gunId, setGunId] = createSignal('');
   const [gunSearch, setGunSearch] = createSignal('');
   const [gunLevel, setGunLevel] = createSignal('60');
+  const [gunSegment, setGunSegment] = createSignal('6');
   const [weaponUid, setWeaponUid] = createSignal('');
   const [weaponId, setWeaponId] = createSignal('');
   const [weaponSearch, setWeaponSearch] = createSignal('');
@@ -61,6 +81,12 @@ export default function GMApp() {
   const [chosenSkins, setChosenSkins] = createSignal<number[]>([]);
   const [cleanUid, setCleanUid] = createSignal('');
   const [events, setEvents] = createSignal<GameEvent[]>([]);
+  const [slotsUid, setSlotsUid] = createSignal('');
+  const [slotsCharacters, setSlotsCharacters] = createSignal<{ id: number; level: number }[]>([]);
+  const [selectedCharacterId, setSelectedCharacterId] = createSignal(0);
+  const [slotsLoading, setSlotsLoading] = createSignal(false);
+  const [slotsData, setSlotsData] = createSignal<SlotData[]>([]);
+  const [slotsCatalog, setSlotsCatalog] = createSignal<TraitEntry[]>([]);
   const [eventQuery, setEventQuery] = createSignal('');
   const [eventOnlyOpen, setEventOnlyOpen] = createSignal(false);
   const [eventDays, setEventDays] = createSignal('14');
@@ -109,6 +135,14 @@ export default function GMApp() {
     setNotice({ text, error });
     if (noticeTimer) window.clearTimeout(noticeTimer);
     noticeTimer = window.setTimeout(() => setNotice(undefined), 4600);
+  }
+
+  // Tauri rejects with a plain string; native errors are Error objects. Never render "undefined".
+  function errorMessage(e: unknown): string {
+    if (e instanceof Error) return e.message;
+    if (typeof e === 'string') return e;
+    if (e && typeof e === 'object' && 'message' in e && typeof (e as { message: unknown }).message === 'string') return (e as { message: string }).message;
+    try { return JSON.stringify(e); } catch { return String(e); }
   }
 
   async function loadEvents() {
@@ -164,7 +198,7 @@ export default function GMApp() {
       poller = window.setInterval(() => void refreshStatus().catch((e: Error) => {
         setConnected(false); setLastAction(e.message);
       }), 5000);
-    } catch (e) { setConnected(false); notify((e as Error).message, true); }
+    } catch (e) { setConnected(false); notify(errorMessage(e), true); }
     finally { setBusy(false); }
   }
 
@@ -181,7 +215,7 @@ export default function GMApp() {
       const data = await request<Account[]>('GET', `accounts?q=${query}`);
       setAccounts(data); setAccountDetail(undefined);
       setLastAction(`${t('search')} · ${data.length} ${t('results').toLocaleLowerCase()}`);
-    } catch (e) { notify((e as Error).message, true); }
+    } catch (e) { notify(errorMessage(e), true); }
     finally { setBusy(false); }
   }
 
@@ -190,7 +224,7 @@ export default function GMApp() {
     try {
       const detail = await request<Record<string, unknown>>('GET', `accounts/${account.uid}`);
       setAccountDetail(detail); setLastAction(`${t('account')} ${account.uid}`);
-    } catch (e) { notify((e as Error).message, true); }
+    } catch (e) { notify(errorMessage(e), true); }
   }
 
   async function removeCharacter(gunId: number) {
@@ -205,7 +239,7 @@ export default function GMApp() {
       notify(t('characterRemoved'));
       const row = accounts().find((r) => r.uid === uid);
       if (row) await openAccount(row);
-    } catch (e) { notify((e as Error).message, true); }
+    } catch (e) { notify(errorMessage(e), true); }
     finally { setBusy(false); }
   }
 
@@ -223,7 +257,7 @@ export default function GMApp() {
       setLastAction(`${t('deleteAccount')} · ${uid}`);
       notify(t('accountDeleted'));
       if (status()) await refreshStatus();
-    } catch (e) { notify((e as Error).message, true); }
+    } catch (e) { notify(errorMessage(e), true); }
     finally { setBusy(false); }
   }
 
@@ -238,7 +272,7 @@ export default function GMApp() {
         if (uid) await openAccount({ uid: Number(uid), email: '', isGuest: false, timeLastLogin: '' });
       }
       if (status()) await refreshStatus();
-    } catch (e) { notify((e as Error).message, true); }
+    } catch (e) { notify(errorMessage(e), true); }
     finally { setBusy(false); }
   }
 
@@ -251,9 +285,9 @@ export default function GMApp() {
 
   async function grantGun(event: SubmitEvent) {
     event.preventDefault();
-    const uid = Number(gunUid()), id = Number(gunId()), level = Number(gunLevel());
-    if (!Number.isInteger(uid) || uid <= 0 || !localCatalog().characters.some((entry) => entry.id === id) || !Number.isInteger(level) || level < 1 || level > 60) return notify(t('characterValidation'), true);
-    await runAction(`accounts/${uid}/characters`, { gunId: id, level }, t('characterDone'));
+    const uid = Number(gunUid()), id = Number(gunId()), level = Number(gunLevel()), segment = Number(gunSegment());
+    if (!Number.isInteger(uid) || uid <= 0 || !localCatalog().characters.some((entry) => entry.id === id) || !Number.isInteger(level) || level < 1 || level > 60 || !Number.isInteger(segment) || segment < 0 || segment > 6) return notify(t('characterValidation'), true);
+    await runAction(`accounts/${uid}/characters`, { gunId: id, level, segment }, t('characterDone'));
     for (const costumeId of chosenCostumes()) await runAction(`accounts/${uid}/costumes`, { costumeId }, t('costumeDone'));
   }
 
@@ -274,6 +308,146 @@ export default function GMApp() {
     await runAction(`accounts/${uid}/clean`, { confirmUid: uid, type: cleanType() }, t('cleanDone'));
   }
 
+  async function loadAccountCharacters() {
+    const uid = Number(slotsUid());
+    if (!Number.isInteger(uid) || uid <= 0) return notify(t('uidInvalid'), true);
+    setSlotsLoading(true);
+    try {
+      const [data, catalog] = await Promise.all([
+        request<{ uid?: number; characters?: { id: number; level: number; slots?: string[] }[] }>('GET', `accounts/${uid}/remoulding/characters`),
+        request<TraitEntry[]>('GET', 'remoulding/traits-catalog').catch(() => slotsCatalog()),
+      ]);
+      if (Array.isArray(catalog) && catalog.length > 0) setSlotsCatalog(catalog);
+      const list = Array.isArray(data?.characters) ? data.characters! : Array.isArray(data) ? (data as unknown as { id: number; level: number }[]) : [];
+      setSlotsCharacters(list);
+      setSelectedCharacterId(0);
+      setSlotsData([]);
+      notify(`${t('accountLoaded')} · ${list.length} ${t('charsWithCores')}`);
+    } catch (e) { notify(errorMessage(e), true); }
+    finally { setSlotsLoading(false); }
+  }
+
+  // level cap of a trait group: mapping first, server catalog as fallback
+  const maxLevelOf = (group: number): number => {
+    const meta = traitMap[String(group)];
+    if (meta?.maxLevel) return meta.maxLevel;
+    const rows = slotsCatalog().filter((c) => c.group === group);
+    return rows.length ? Math.max(...rows.map((c) => c.level)) : 1;
+  };
+
+  // static level text for a trait entry: "Lv.3 · 3%" — levels are not editable
+  // (changing one invalidates the core)
+  const levelLabel = (t?: { id: number; level: number }): string => {
+    if (!t?.id) return 'Lv.0';
+    const lv = Math.max(t.level || 1, 1);
+    const value = traitMap[String(Math.floor(t.id / 100))]?.levels?.[lv - 1];
+    return `Lv.${lv}${value ? ` · ${value}` : ''}`;
+  };
+
+  // the 4 official main-stat groups of a core type: 1T001..1T004
+  // (type 1 → 11001-11004 HP Boost/Defense Boost/Pinpoint Defense/Annular Defense, etc.)
+  const mainStatGroups = (type: number): number[] =>
+    [1, 2, 3, 4].map((g) => 10000 + type * 1000 + g);
+
+  // dropdown options for one trait position:
+  //  - trait 1 (main stat): only the core type's 4 official main-stat traits
+  //  - traits 2/3: any trait except this core's main-stat pool and the other slot's pick
+  const traitOptions = (s: SlotData, j: number): [string, TraitMeta][] => {
+    const entries = Object.entries(traitMap);
+    let list: [string, TraitMeta][];
+    if (j === 0) {
+      const mains = s.type != null ? new Set(mainStatGroups(s.type)) : null;
+      list = mains ? entries.filter(([id]) => mains.has(Number(id))) : entries;
+    } else {
+      // the core's 4 main-stat traits belong to trait 1 and are never valid as subs,
+      // while mains of the OTHER categories stay selectable
+      const blocked = new Set<number>(s.type != null ? mainStatGroups(s.type) : []);
+      const other = s.traits[j === 1 ? 2 : 1]?.id;
+      if (other) blocked.add(Math.floor(other / 100));
+      list = entries.filter(([id]) => !blocked.has(Number(id)));
+    }
+    const current = s.traits[j]?.id ? Math.floor(s.traits[j].id / 100) : 0;
+    if (current && !list.some(([id]) => Number(id) === current)) {
+      const cur = entries.find(([id]) => Number(id) === current);
+      if (cur) list.push(cur);
+    }
+    return list;
+  };
+
+  // trait id -> { name, level } from FeaturesEntryData (server traits-catalog)
+  const traitInfo = (id: number) => {
+    // First try to get from server catalog
+    const serverTrait = slotsCatalog().find((c) => c.id === id);
+    if (serverTrait) return serverTrait;
+    
+    // Fall back to trait mapping data (group key = id / 100)
+    const mapped = mappedTrait(id);
+    if (mapped) {
+      return {
+        id,
+        name: mapped.name,
+        type: 0, // Default type
+        group: 0, // Default group
+        level: 1, // Default level
+        value: 0, // Default value
+      };
+    }
+    
+    return null;
+  };
+
+  async function loadCharacterSlots(uid: number, gunId: number) {
+    try {
+      const data = await request<{ uid?: number; gunId?: number; slots?: { slot: number; pluginId: string | null; editable: boolean; coreId: number | null; stcId?: number | null; type?: number | null; entries: { id: number; name?: string; level: number }[] }[] }>('GET', `accounts/${uid}/remoulding/slots/${gunId}`);
+      const slots = Array.isArray(data?.slots) ? data.slots : [];
+      const result: SlotData[] = slots.map(s => ({
+        slot: s.slot,
+        coreId: s.coreId ?? s.stcId ?? null,
+        stcId: s.stcId ?? null,
+        type: s.type ?? null,
+        pluginId: s.pluginId ?? null,
+        editable: !!s.editable,
+        traits: (s.entries ?? []).map(e => {
+          const trait = traitInfo(e.id);
+          return { 
+            id: e.id, 
+            level: e.level, 
+            name: e.name || trait?.name || mappedTrait(e.id)?.name || `Trait #${e.id}` 
+          };
+        }),
+      }));
+      setSlotsData(result);
+      notify(`${t('slotsLoaded')} · ${result.filter(r => r.pluginId !== null).length}/6`);
+    } catch (e) { notify(errorMessage(e), true); }
+  }
+
+
+  // Always render 6 slot cards (placeholders until chips are loaded).
+  const displaySlots = createMemo<SlotData[]>(() => {
+    const loaded = slotsData();
+    if (loaded.length > 0) return loaded;
+    return Array.from({ length: 6 }, (_, i) => ({ slot: i + 1, coreId: null, pluginId: null, editable: false, traits: [] }));
+  });
+
+  async function applyCharacterTraits() {
+    const uid = Number(slotsUid());
+    const gunId = selectedCharacterId();
+    if (!Number.isInteger(uid) || uid <= 0) return notify(t('uidInvalid'), true);
+    if (!Number.isInteger(gunId) || gunId <= 0) return notify(t('slotsSelectCharacter'), true);
+    const changed = slotsData().filter(s => s.pluginId !== null && s.editable);
+    if (changed.length === 0) return notify(t('slotsNothingEditable'), true);
+    try {
+      for (const s of changed) {
+        const traits = s.traits.filter(t => t.id > 0).map(t => t.id);
+        if (traits.length === 0) continue;
+        // pluginId travels as a string: 1.8e18 exceeds Number.MAX_SAFE_INTEGER
+        await request('POST', `accounts/${uid}/remoulding/traits`, { pluginId: s.pluginId!, traits });
+      }
+      await loadCharacterSlots(uid, gunId);
+      notify(t('slotsApplied'));
+    } catch (e) { notify(errorMessage(e), true); }
+  }
+
   async function executeCommand(event: SubmitEvent) {
     event.preventDefault();
     if (!commandText().trim()) return;
@@ -282,7 +456,7 @@ export default function GMApp() {
       const result = await request('POST', 'commands', { command: commandText().trim() });
       setCommandResult(JSON.stringify(result, null, 2));
       setLastAction(`${t('execute')} · ${new Date().toLocaleTimeString()}`);
-    } catch (e) { setCommandResult((e as Error).message); }
+    } catch (e) { setCommandResult(errorMessage(e)); }
     finally { setBusy(false); }
   }
 
@@ -332,11 +506,94 @@ export default function GMApp() {
           <Show when={tab() === 'operations'}><div class="mb-5"><h2 class="section-title">{t('operationsTitle')}</h2><p class="section-subtitle">{t('operationsHint')}</p></div><div class="grid grid-cols-2 gap-4">
             <form class="surface-card operation-card" onSubmit={grantItem}><OperationHeading icon={Gift} title={t('grantObject')} subtitle={t('objectHint')} number="01" tone="aqua"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={itemUid()} onInput={(e) => setItemUid(e.currentTarget.value)}/></Field><Field label={t('searchItem')}><CatalogPicker language={language()} nameMode="item-weapon" id="items" total={localCatalog().items.length} entries={filteredItems()} selectedId={Number(itemId())} query={itemSearch()} placeholder={t('itemSearchPlaceholder')} empty={t('noMatches')} resultsLabel={t('catalogResults')} onQuery={(value) => { setItemSearch(value); setItemId(''); }} choose={(entry) => { setItemId(String(entry.id)); setItemSearch(itemWeaponName(entry, language())); }} /></Field><div class="selection-summary"><Show when={selectedItem()}>{(entry) => <><Show when={entry().image}><img src={entry().image} alt=""/></Show><span>{itemWeaponName(entry(), language())} <small>#{entry().id}</small></span></>}</Show><Show when={!selectedItem()}><span>{t('chooseItem')}</span></Show></div><Field label={t('quantity')}><input class="input-field" type="number" min="1" max="1000000" value={itemCount()} onInput={(e) => setItemCount(e.currentTarget.value)}/></Field><button class="primary-button mt-2 w-full" disabled={!connected() || busy() || !selectedItem()}><Plus size={15}/>{t('grantToAccount')}</button></form>
 
-            <form class="surface-card operation-card" onSubmit={grantGun}><OperationHeading icon={Users} title={t('grantCharacter')} subtitle={t('characterHint')} number="02" tone="violet"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={gunUid()} onInput={(e) => setGunUid(e.currentTarget.value)}/></Field><Field label={t('searchCharacter')}><CatalogPicker language={language()} id="characters" entries={filteredCharacters()} selectedId={Number(gunId())} query={gunSearch()} placeholder={t('characterSearchPlaceholder')} empty={t('noMatches')} resultsLabel={t('catalogResults')} onQuery={(value) => { setGunSearch(value); setGunId(''); setChosenCostumes([]); }} choose={(entry) => { setGunId(String(entry.id)); setGunSearch(catalogName(entry, language())); setChosenCostumes([]); }} /></Field><div class="selection-summary"><Show when={selectedCharacter()}>{(entry) => <><img src={entry().image || undefined} alt=""/><span>{t('selectedCharacter')}: {catalogName(entry(), language())} <small>#{entry().id}</small></span></>}</Show><Show when={!selectedCharacter()}><span>{t('chooseCharacter')}</span></Show></div><Field label={t('level')}><input class="input-field" type="number" min="1" max="60" value={gunLevel()} onInput={(e) => setGunLevel(e.currentTarget.value)}/></Field><Show when={selectedCharacter()}><SkinGallery title={t('skinsHeading')} selectedLabel={t('skinsSelected')} allLabel={t('selectAll')} noneLabel={t('clearSelection')} empty={t('noSkinsFor')} language={language()} entries={costumesOfSelected()} chosen={chosenCostumes()} toggle={(id) => toggleIn(chosenCostumes, setChosenCostumes, id)} setAll={(ids) => setChosenCostumes(ids)} nameMode="character"/></Show><button class="primary-button mt-2 w-full" disabled={!connected() || busy() || !selectedCharacter()}><Zap size={15}/>{chosenCostumes().length ? t('applyWithSkins') : t('applyCharacter')}</button></form>
+            <form class="surface-card operation-card" onSubmit={grantGun}><OperationHeading icon={Users} title={t('grantCharacter')} subtitle={t('characterHint')} number="02" tone="violet"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={gunUid()} onInput={(e) => setGunUid(e.currentTarget.value)}/></Field><Field label={t('searchCharacter')}><CatalogPicker language={language()} id="characters" entries={filteredCharacters()} selectedId={Number(gunId())} query={gunSearch()} placeholder={t('characterSearchPlaceholder')} empty={t('noMatches')} resultsLabel={t('catalogResults')} onQuery={(value) => { setGunSearch(value); setGunId(''); setChosenCostumes([]); }} choose={(entry) => { setGunId(String(entry.id)); setGunSearch(catalogName(entry, language())); setChosenCostumes([]); }} /></Field><div class="selection-summary"><Show when={selectedCharacter()}>{(entry) => <><img src={entry().image || undefined} alt=""/><span>{t('selectedCharacter')}: {catalogName(entry(), language())} <small>#{entry().id}</small></span></>}</Show><Show when={!selectedCharacter()}><span>{t('chooseCharacter')}</span></Show></div><div class="grid grid-cols-2 gap-3"><Field label={t('level')}><input class="input-field" type="number" min="1" max="60" value={gunLevel()} onInput={(e) => setGunLevel(e.currentTarget.value)}/></Field><Field label={t('segment')}><input class="input-field" type="number" min="0" max="6" value={gunSegment()} onInput={(e) => setGunSegment(e.currentTarget.value)}/></Field></div><Show when={selectedCharacter()}><SkinGallery title={t('skinsHeading')} selectedLabel={t('skinsSelected')} allLabel={t('selectAll')} noneLabel={t('clearSelection')} empty={t('noSkinsFor')} language={language()} entries={costumesOfSelected()} chosen={chosenCostumes()} toggle={(id) => toggleIn(chosenCostumes, setChosenCostumes, id)} setAll={(ids) => setChosenCostumes(ids)} nameMode="character"/></Show><button class="primary-button mt-2 w-full" disabled={!connected() || busy() || !selectedCharacter()}><Zap size={15}/>{chosenCostumes().length ? t('applyWithSkins') : t('applyCharacter')}</button></form>
 
             <form class="surface-card operation-card" onSubmit={grantWeapon}><OperationHeading icon={Boxes} title={t('grantWeapon')} subtitle={t('weaponHint')} number="03" tone="amber"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={weaponUid()} onInput={(e) => setWeaponUid(e.currentTarget.value)}/></Field><Field label={t('searchWeapon')}><CatalogPicker language={language()} nameMode="item-weapon" id="weapons" entries={filteredWeapons()} selectedId={Number(weaponId())} query={weaponSearch()} placeholder={t('weaponSearchPlaceholder')} empty={t('noMatches')} resultsLabel={t('catalogResults')} onQuery={(value) => { setWeaponSearch(value); setWeaponId(''); setChosenSkins([]); }} choose={(entry) => { setWeaponId(String(entry.id)); setWeaponSearch(itemWeaponName(entry, language())); setChosenSkins([]); }} /></Field><div class="selection-summary"><Show when={selectedWeapon()}>{(entry) => <><img src={entry().image || undefined} alt=""/><span>{t('selectedCharacter')}: {itemWeaponName(entry(), language())} <small>#{entry().id}</small></span></>}</Show><Show when={!selectedWeapon()}><span>{t('chooseWeapon')}</span></Show></div><Field label={t('copies')}><input class="input-field" type="number" min="1" max="50" value={weaponCount()} onInput={(e) => setWeaponCount(e.currentTarget.value)}/></Field><Show when={selectedWeapon()}><SkinGallery title={t('skinsHeading')} selectedLabel={t('skinsSelected')} allLabel={t('selectAll')} noneLabel={t('clearSelection')} empty={t('noSkinsFor')} language={language()} entries={skinsOfSelected()} chosen={chosenSkins()} toggle={(id) => toggleIn(chosenSkins, setChosenSkins, id)} setAll={(ids) => setChosenSkins(ids)} nameMode="item-weapon"/></Show><button class="primary-button mt-2 w-full" disabled={!connected() || busy() || !selectedWeapon()}><Plus size={15}/>{chosenSkins().length ? t('addWithSkins') : t('addWeapon')}</button></form>
 
             <form class="surface-card operation-card danger-card" onSubmit={cleanInventory}><OperationHeading icon={Trash2} title={t('resetAmounts')} subtitle={t('resetHint')} number="04" tone="rose"/><Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={cleanUid()} onInput={(e) => setCleanUid(e.currentTarget.value)}/></Field><Field label={t('group')}><select class="input-field" value={cleanType()} onChange={(e) => setCleanType(e.currentTarget.value)}><option value="items">{t('allItems')}</option><option value="resources">{t('resources')}</option></select></Field><button class="danger-button mt-4 w-full" disabled={!connected() || busy()}><Trash2 size={15}/>{t('resetButton')}</button></form>
+
+            <form class="surface-card operation-card" onSubmit={(e) => { e.preventDefault(); void loadAccountCharacters(); }}>
+              <OperationHeading icon={Wrench} title={t('slotsTitle')} subtitle={t('slotsHint')} number="05" tone="aqua"/>
+              <Field label={t('accountUid')}><input class="input-field" inputmode="numeric" placeholder="100001" value={slotsUid()} onInput={(e) => setSlotsUid(e.currentTarget.value)}/></Field>
+              <button type="submit" class="primary-button mt-2 w-full" disabled={!connected() || busy() || slotsLoading()}>{slotsLoading() ? <LoaderCircle size={14}/> : <RefreshCw size={14}/>} {t('slotsLoadAccount')}</button>
+              <Field label={t('slotsChooseCharacter')}>
+                <select class="input-field" value={selectedCharacterId()} onChange={(e) => setSelectedCharacterId(Number(e.currentTarget.value || '0'))} disabled={slotsCharacters().length === 0}>
+                  <option value="0">{slotsCharacters().length > 0 ? t('slotsSelectCharacter') : t('slotsNoCharacters')}</option>
+                  <For each={slotsCharacters()}>{(c) => { const ch = localCatalog().characters.find((x) => x.id === c.id); return <option key={c.id} value={c.id}>{ch ? catalogName(ch, language()) : 'Character'} #{c.id} (Lv.{c.level})</option>; }}</For>
+                </select>
+              </Field>
+              <button type="button" class="primary-button mt-2 w-full" disabled={!connected() || busy() || slotsLoading() || selectedCharacterId() === 0} onClick={() => void loadCharacterSlots(Number(slotsUid()), selectedCharacterId())}><RefreshCw size={14}/> {t('slotsLoadChips')}</button>
+              <div class="mt-4">
+                <div class="mb-3 flex items-center justify-between">
+                  <h3 class="card-title">{selectedCharacterId() > 0 ? t('slotsForCharacter', { id: selectedCharacterId() }) : t('slotsSection')}</h3>
+                  <span class="tiny-chip">{slotsLoading() ? t('slotsLoading') : slotsData().length > 0 ? t('slotsReady') : t('slotsIdle')}</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <For each={displaySlots()}>{(s) => (
+                    <div class="slot-card" key={s.slot}>
+                      <div class="slot-header"><span class="slot-num">{t('slotsSlot', { n: s.slot })}</span><span class="slot-core">{s.coreId !== null ? `Core ${s.coreId}${s.type ? ` · ${CATEGORY_NAMES[s.type] ?? ''}` : ''}` : t('slotsEmpty')}</span></div>
+                      <div class="slot-plugin">{s.pluginId !== null ? `Core ${s.coreId ?? s.stcId ?? s.pluginId}` : t('slotsEmpty')}{s.pluginId !== null && !s.editable ? ` · ${t('slotsNotEditable')}` : ''}</div>
+                      <div class="slot-traits">
+                        <For each={[0, 1, 2]}>{(j) => (
+                          <Show when={s.pluginId !== null}>
+                            <div class="trait-input">
+                              <div class="trait-display">
+                                <div class="trait-row">
+                                  <span class="trait-head">
+                                    <label>{t('slotsTrait', { n: j + 1 })}</label>
+                                    <span class="trait-id">{s.traits[j]?.id || '---'}</span>
+                                  </span>
+                                  <div class="trait-dropdown">
+                                    <select 
+                                      class="trait-select" 
+                                      value={s.traits[j]?.id ? String(Math.floor(s.traits[j].id / 100)) : ''} 
+                                      disabled={!s.editable}
+                                      onChange={(e) => {
+                                        if (!s.editable) return;
+                                        const group = Number(e.currentTarget.value || '0');
+                                        const sd = slotsData().map((slot) => slot.slot === s.slot ? { ...slot, traits: [...slot.traits] } : slot);
+                                        const target = sd.find((slot) => slot.slot === s.slot);
+                                        if (!target) return;
+                                        while (target.traits.length <= j) target.traits.push({ id: 0, level: 0, name: '' });
+                                        if (!group) { target.traits[j] = { id: 0, level: 0, name: '' }; setSlotsData(sd); return; }
+                                        const meta = mappedTrait(group);
+                                        // keep the current level when switching traits, capped at the new trait's max
+                                        const level = Math.min(Math.max(target.traits[j].level || 1, 1), maxLevelOf(group));
+                                        target.traits[j] = { id: group * 100 + level, level, name: meta?.name || '' };
+                                        // traits 2/3 are mutually exclusive: clear the sibling slot if it holds this trait
+                                        // (trait 1 is the main stat and is never touched)
+                                        const sibling = j === 1 ? 2 : j === 2 ? 1 : -1;
+                                        if (sibling >= 0) {
+                                          const st = target.traits[sibling];
+                                          if (st?.id && Math.floor(st.id / 100) === group) target.traits[sibling] = { id: 0, level: 0, name: '' };
+                                        }
+                                        setSlotsData(sd);
+                                      }}
+                                    >
+                                      <option value="">{t('chooseTrait')}</option>
+                                      <For each={traitOptions(s, j)}>{([id, trait]) => (
+                                        <option value={id}>{trait.name}</option>
+                                      )}</For>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="trait-row">
+                                  <span class="trait-level">{levelLabel(s.traits[j])}</span>
+                                  <span class="trait-name">
+                                    {s.traits[j]?.name || (s.traits[j]?.id ? mappedTrait(s.traits[j].id)?.name || `#${s.traits[j].id}` : '')}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </Show>
+                        )}</For>
+                      </div>
+                    </div>
+                  )}</For>
+                </div>
+                <button type="button" class="primary-button mt-3 w-full" disabled={!connected() || busy() || slotsLoading()} onClick={() => void applyCharacterTraits()}><Zap size={14}/> {t('slotsApply')}</button>
+              </div>
+            </form>
           </div><Show when={notice()}>{(n) => <div class={`result-banner mt-4 ${n().error ? 'error-banner' : ''}`}><Check size={15}/><span>{n().text}</span></div>}</Show></Show>
 
           <Show when={tab() === 'events'}><div class="mb-5 flex items-end justify-between"><div><h2 class="section-title">{t('eventsTitle')}</h2><p class="section-subtitle">{t('eventsHint')}</p></div><button class="quiet-button" disabled={!connected() || busy()} onClick={() => void loadEvents()}><RefreshCw size={14}/> {t('eventsLoad')}</button></div><div class="mb-4 flex items-start gap-3 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3 text-[12px] leading-relaxed text-amber-200"><CircleHelp size={16} class="mt-0.5 shrink-0"/><span><b>EXPERIMENTAL</b> · {t('eventsExperimental')}</span></div><section class="surface-card p-5"><div class="mb-4 flex items-center gap-3"><label class="search-field"><Search size={14}/><input placeholder={t('eventsSearch')} value={eventQuery()} onInput={(e) => setEventQuery(e.currentTarget.value)}/></label><label class="flex items-center gap-2 text-[12px] text-ice-300"><input type="checkbox" checked={eventOnlyOpen()} onChange={(e) => setEventOnlyOpen(e.currentTarget.checked)}/>{t('eventsOnlyOpen')}</label><label class="flex items-center gap-2 text-[12px] text-ice-300">{t('eventsDays')}<input class="input-field w-20" value={eventDays()} onInput={(e) => setEventDays(e.currentTarget.value)}/></label></div><Show when={shownEvents().length > 0} fallback={<div class="empty-log"><CalendarDays size={18}/><span>{events().length ? t('eventsNone') : t('eventsLoad')}</span></div>}><div class="max-h-[560px] overflow-y-auto"><For each={shownEvents()}>{(event) => <div class="flex items-center gap-3 border-t border-white/[0.06] py-3"><img class="size-14 shrink-0 rounded-md bg-white/[0.04] object-contain" src={`/catalog/events/${event.id}.webp`} alt="" loading="lazy" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}/><div class="min-w-0 flex-1"><div class="text-[13px] font-semibold">{eventTitle(event)} <span class="text-ice-500">#{event.id}</span></div><Show when={eventTitle(event) !== event.name && event.name}><div class="text-[11px] text-ice-500">{event.name}</div></Show><div class="mt-1 text-[11px] text-ice-500">{t('eventsType')} {event.type} · {t('eventsOfficial')}: {day(event.officialOpen)} → {day(event.officialClose)}<Show when={event.open !== null}> · <span class="text-aqua-300">{t('eventsUntil')} {day(event.close ?? 0)}</span></Show></div></div><button class={event.open !== null ? 'quiet-button' : 'primary-button'} disabled={busy()} onClick={() => void toggleEvent(event)}>{event.open !== null ? t('eventsClose') : t('eventsOpen')}</button></div>}</For></div></Show></section></Show>

@@ -1,0 +1,1130 @@
+{
+  "11001": {
+    "name": "HP Boost",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 11001,
+    "maxLevel": 6,
+    "levels": [
+      "0.8%",
+      "1.2%",
+      "2%",
+      "2.4%",
+      "3.2%",
+      "3.6%"
+    ],
+    "description": "Max HP is increased by {x}.",
+    "element": "none",
+    "stat": "HP",
+    "scaling": "none",
+    "dps": false
+  },
+  "11002": {
+    "name": "Defense Boost",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 11002,
+    "maxLevel": 6,
+    "levels": [
+      "0.8%",
+      "1.2%",
+      "2%",
+      "2.4%",
+      "3.2%",
+      "3.6%"
+    ],
+    "description": "Defense is increased by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "11003": {
+    "name": "Pinpoint Defense",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 11003,
+    "maxLevel": 6,
+    "levels": [
+      "2%",
+      "2.5%",
+      "3.5%",
+      "4%",
+      "5%",
+      "5.5%"
+    ],
+    "description": "Targeted damage taken is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "11004": {
+    "name": "Annular Defense",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 11004,
+    "maxLevel": 6,
+    "levels": [
+      "2%",
+      "2.5%",
+      "3.5%",
+      "4%",
+      "5%",
+      "5.5%"
+    ],
+    "description": "AoE damage taken is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "12001": {
+    "name": "Smite Boost",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 12001,
+    "maxLevel": 6,
+    "levels": [
+      "1.2%",
+      "1.6%",
+      "2.4%",
+      "2.8%",
+      "3.6%",
+      "4.0%"
+    ],
+    "description": "Critical damage is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "12002": {
+    "name": "Beheading Blade",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 12002,
+    "maxLevel": 6,
+    "levels": [
+      "1.5%",
+      "2%",
+      "3%",
+      "3.5%",
+      "4.5%",
+      "5%"
+    ],
+    "description": "Critical damage dealt to boss units is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "12003": {
+    "name": "Precision Blow",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 12003,
+    "maxLevel": 6,
+    "levels": [
+      "1.5%",
+      "2%",
+      "3%",
+      "3.5%",
+      "4.5%",
+      "5%"
+    ],
+    "description": "When dealing targeted damage, critical damage is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "12004": {
+    "name": "Area Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 12004,
+    "maxLevel": 6,
+    "levels": [
+      "1.5%",
+      "2%",
+      "3%",
+      "3.5%",
+      "4.5%",
+      "5%"
+    ],
+    "description": "When dealing AoE damage, critical damage is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "13001": {
+    "name": "Attack Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 13001,
+    "maxLevel": 6,
+    "levels": [
+      "0.3%",
+      "0.4%",
+      "0.6%",
+      "0.7%",
+      "0.9%",
+      "1%"
+    ],
+    "description": "All allied units' attack is increased by {x}. Does not stack.",
+    "element": "none",
+    "stat": "ATK",
+    "scaling": "none",
+    "dps": false
+  },
+  "13002": {
+    "name": "HP Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 13002,
+    "maxLevel": 6,
+    "levels": [
+      "0.3%",
+      "0.4%",
+      "0.6%",
+      "0.7%",
+      "0.9%",
+      "1%"
+    ],
+    "description": "All allied units' max HP is increased by {x}. Does not stack.",
+    "element": "none",
+    "stat": "HP",
+    "scaling": "none",
+    "dps": false
+  },
+  "13003": {
+    "name": "Healing Boost",
+    "category": "Support",
+    "type": 3,
+    "group": 13003,
+    "maxLevel": 6,
+    "levels": [
+      "1.5%",
+      "2%",
+      "3%",
+      "3.5%",
+      "4.5%",
+      "5%"
+    ],
+    "description": "Healing and shield effects applied are increased by {x}.",
+    "element": "none",
+    "stat": "HEAL_SHIELD",
+    "scaling": "none",
+    "dps": false
+  },
+  "13004": {
+    "name": "Fighting Spirit",
+    "category": "Support",
+    "type": 3,
+    "group": 13004,
+    "maxLevel": 6,
+    "levels": [
+      "0.4%",
+      "0.6%",
+      "1%",
+      "1.2%",
+      "1.6%",
+      "1.8%"
+    ],
+    "description": "Attack and max HP is increased by {x}.",
+    "element": "none",
+    "stat": "HP",
+    "scaling": "none",
+    "dps": false
+  },
+  "14001": {
+    "name": "Attack Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 14001,
+    "maxLevel": 6,
+    "levels": [
+      "0.8%",
+      "1.2%",
+      "2%",
+      "2.4%",
+      "3.2%",
+      "3.6%"
+    ],
+    "description": "Attack is increased by {x}.",
+    "element": "none",
+    "stat": "ATK",
+    "scaling": "none",
+    "dps": true
+  },
+  "14002": {
+    "name": "Thronebreaker",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 14002,
+    "maxLevel": 6,
+    "levels": [
+      "2%",
+      "2.5%",
+      "3.5%",
+      "4%",
+      "5%",
+      "5.5%"
+    ],
+    "description": "Damage dealt to boss units is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "14003": {
+    "name": "Pinpoint Specialization",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 14003,
+    "maxLevel": 6,
+    "levels": [
+      "2%",
+      "2.5%",
+      "3.5%",
+      "4%",
+      "5%",
+      "5.5%"
+    ],
+    "description": "Targeted damage dealt is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "14004": {
+    "name": "Area Specialization",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 14004,
+    "maxLevel": 6,
+    "levels": [
+      "2%",
+      "2.5%",
+      "3.5%",
+      "4%",
+      "5%",
+      "5.5%"
+    ],
+    "description": "AoE damage dealt is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "21001": {
+    "name": "Burn Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21001,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Burn damage taken is reduced by {x}.",
+    "element": "Burn",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21002": {
+    "name": "Freeze Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21002,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Freeze damage taken is reduced by {x}.",
+    "element": "Freeze",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21003": {
+    "name": "Corrosion Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21003,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Corrosion damage taken is reduced by {x}.",
+    "element": "Corrosion",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21004": {
+    "name": "Hydro Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21004,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Hydro damage taken is reduced by {x}.",
+    "element": "Hydro",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21005": {
+    "name": "Electric Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21005,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Electric damage taken is reduced by {x}.",
+    "element": "Electric",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21006": {
+    "name": "Physical Resistance",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21006,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Physical damage taken is reduced by {x}.",
+    "element": "Physical",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21007": {
+    "name": "Breakout Countermeasures",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21007,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "When there are 2 or more enemy units within 3 tiles of this unit, damage taken is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21008": {
+    "name": "Lone Rider Countermeasures",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21008,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "When there is only 1 enemy unit within 3 tiles of this unit, damage taken is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21009": {
+    "name": "Boss Countermeasures",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21009,
+    "maxLevel": 2,
+    "levels": [
+      "0.4%",
+      "0.8%"
+    ],
+    "description": "Damage taken from boss units is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21010": {
+    "name": "Melee Countermeasures",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21010,
+    "maxLevel": 3,
+    "levels": [
+      "0.3%",
+      "0.6%",
+      "0.9%"
+    ],
+    "description": "Damage taken from enemy units within 3 tiles of this unit is reduced by {x}.",
+    "element": "none",
+    "stat": "DEF",
+    "scaling": "none",
+    "dps": false
+  },
+  "21011": {
+    "name": "Lex Talionis",
+    "category": "Bulwark",
+    "type": 1,
+    "group": 21011,
+    "maxLevel": 3,
+    "levels": [
+      "2%",
+      "4%",
+      "6%"
+    ],
+    "description": "When taking damage, deals fixed damage to the attacker equal to {x} of the user's max HP. This damage cannot exceed 100% of this unit's attack.",
+    "element": "none",
+    "stat": "DMG_REFLECT",
+    "scaling": "HP",
+    "dps": false
+  },
+  "22001": {
+    "name": "Burning Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22001,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Burn damage, critical damage is increased by {x}.",
+    "element": "Burn",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22002": {
+    "name": "Freezing Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22002,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Freeze damage, critical damage is increased by {x}.",
+    "element": "Freeze",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22003": {
+    "name": "Corrosive Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22003,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Corrosion damage, critical damage is increased by {x}.",
+    "element": "Corrosion",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22004": {
+    "name": "Hydro Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22004,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Hydro damage, critical damage is increased by {x}.",
+    "element": "Hydro",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22005": {
+    "name": "Electric Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22005,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Electric damage, critical damage is increased by {x}.",
+    "element": "Electric",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22006": {
+    "name": "Physical Smite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22006,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "When dealing Physical damage, critical damage is increased by {x}.",
+    "element": "Physical",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22007": {
+    "name": "Onslaught Mastery",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22007,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "When making an active attack, critical damage is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22008": {
+    "name": "Ambush Mastery",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22008,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "When making an out-of-turn attack, critical damage is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22009": {
+    "name": "Shock and Awe",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22009,
+    "maxLevel": 2,
+    "levels": [
+      "1",
+      "2"
+    ],
+    "description": "The first enemy unit damaged each turn takes an additional {x} point of fixed stability damage. This effect can trigger once per turn.",
+    "element": "none",
+    "stat": "STABILITY",
+    "scaling": "none",
+    "dps": true
+  },
+  "22010": {
+    "name": "CQC Elite",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22010,
+    "maxLevel": 3,
+    "levels": [
+      "0.4%",
+      "0.8%",
+      "1.2%"
+    ],
+    "description": "Damage dealt to enemy units within 3 tiles is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "22011": {
+    "name": "Bloodthirst",
+    "category": "Vanguard",
+    "type": 2,
+    "group": 22011,
+    "maxLevel": 3,
+    "levels": [
+      "2%",
+      "4%",
+      "6%"
+    ],
+    "description": "When attacking, recovers HP equal to {x} of the user's attack.",
+    "element": "none",
+    "stat": "HEAL",
+    "scaling": "none",
+    "dps": true
+  },
+  "23001": {
+    "name": "Burn Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23001,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Burn damage dealt by all allied units is increased by {x}. Does not stack.",
+    "element": "Burn",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23002": {
+    "name": "Freeze Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23002,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Freeze damage dealt by all allied units is increased by {x}. Does not stack.",
+    "element": "Freeze",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23003": {
+    "name": "Corrosion Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23003,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Corrosion damage dealt by all allied units is increased by {x}. Does not stack.",
+    "element": "Corrosion",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23004": {
+    "name": "Hydro Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23004,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Hydro damage dealt by all allied units is increased by {x}. Does not stack.",
+    "element": "Hydro",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23005": {
+    "name": "Electric Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23005,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Electric damage dealt by all allied units is increased by {x}. Does not stack.",
+    "element": "Electric",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23006": {
+    "name": "Physical Unity",
+    "category": "Support",
+    "type": 3,
+    "group": 23006,
+    "maxLevel": 5,
+    "levels": [
+      "0.1%",
+      "0.3%",
+      "0.5%",
+      "0.7%",
+      "0.9%"
+    ],
+    "description": "Physical damage dealt by all allied units is increased {x}. Does not stack.",
+    "element": "Physical",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": false
+  },
+  "23007": {
+    "name": "Ichor Conversion",
+    "category": "Support",
+    "type": 3,
+    "group": 23007,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Attack is increased by {x} of initial max HP.",
+    "element": "none",
+    "stat": "ATK",
+    "scaling": "HP",
+    "dps": true
+  },
+  "23008": {
+    "name": "Ichor Resonance",
+    "category": "Support",
+    "type": 3,
+    "group": 23008,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.4%",
+      "0.6%",
+      "0.8%",
+      "1%"
+    ],
+    "description": "Max HP is increased by {x} of initial attack.",
+    "element": "none",
+    "stat": "HP",
+    "scaling": "ATK",
+    "dps": false
+  },
+  "23009": {
+    "name": "Equilibrium Recovery",
+    "category": "Support",
+    "type": 3,
+    "group": 23009,
+    "maxLevel": 2,
+    "levels": [
+      "1",
+      "2"
+    ],
+    "description": "At the end of this unit's action, restores {x} point of stability. This effect can be triggered once every turn.",
+    "element": "none",
+    "stat": "STABILITY_RESTORE",
+    "scaling": "none",
+    "dps": false
+  },
+  "23010": {
+    "name": "Life Recovery",
+    "category": "Support",
+    "type": 3,
+    "group": 23010,
+    "maxLevel": 3,
+    "levels": [
+      "0.5%",
+      "1%",
+      "1.5%"
+    ],
+    "description": "At the end of this unit's action, restores HP equal to {x} of max HP. This effect can be triggered once every turn.",
+    "element": "none",
+    "stat": "HEAL",
+    "scaling": "HP",
+    "dps": false
+  },
+  "23011": {
+    "name": "Purification Feedback",
+    "category": "Support",
+    "type": 3,
+    "group": 23011,
+    "maxLevel": 3,
+    "levels": [
+      "1%",
+      "2%",
+      "3%"
+    ],
+    "description": "After cleansing an allied unit's debuffs, this unit's attack and max HP are increased by {x} for 2 rounds.",
+    "element": "none",
+    "stat": "HP",
+    "scaling": "none",
+    "dps": false
+  },
+  "24001": {
+    "name": "Burn Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24001,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Burn damage dealt is increased by {x}.",
+    "element": "Burn",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24002": {
+    "name": "Freeze Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24002,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Freeze damage dealt is increased by {x}.",
+    "element": "Freeze",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24003": {
+    "name": "Corrosion Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24003,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Corrosion damage dealt is increased by {x}.",
+    "element": "Corrosion",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24004": {
+    "name": "Hydro Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24004,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Hydro damage dealt is increased by {x}.",
+    "element": "Hydro",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24005": {
+    "name": "Electric Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24005,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Electric damage dealt is increased by {x}.",
+    "element": "Electric",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24006": {
+    "name": "Physical Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24006,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.5%",
+      "0.8%",
+      "1.1%",
+      "1.4%"
+    ],
+    "description": "Physical damage dealt is increased by {x}.",
+    "element": "Physical",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24007": {
+    "name": "Onslaught Stance",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24007,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.6%",
+      "1%",
+      "1.4%",
+      "1.8%"
+    ],
+    "description": "Damage dealt by active skills is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24008": {
+    "name": "Raid Stance",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24008,
+    "maxLevel": 5,
+    "levels": [
+      "0.2%",
+      "0.6%",
+      "1%",
+      "1.4%",
+      "1.8%"
+    ],
+    "description": "Damage dealt by out-of-turn attacks is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24009": {
+    "name": "Follow-Up Strike",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24009,
+    "maxLevel": 2,
+    "levels": [
+      "0.5%",
+      "1%"
+    ],
+    "description": "Damage dealt to enemy units in Stability Break is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24010": {
+    "name": "Headhunter",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24010,
+    "maxLevel": 3,
+    "levels": [
+      "0.4%",
+      "0.8%",
+      "1.2%"
+    ],
+    "description": "Damage dealt to enemy units more than 6 tiles away is increased by {x}.",
+    "element": "none",
+    "stat": "DMG",
+    "scaling": "none",
+    "dps": true
+  },
+  "24011": {
+    "name": "Critical Boost",
+    "category": "Sentinel",
+    "type": 4,
+    "group": 24011,
+    "maxLevel": 3,
+    "levels": [
+      "1%",
+      "2%",
+      "3%"
+    ],
+    "description": "Critical rate is increased by {x}.",
+    "element": "none",
+    "stat": "CRIT_RATE",
+    "scaling": "none",
+    "dps": true
+  }
+}
