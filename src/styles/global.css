@@ -159,4 +159,30 @@ button { -webkit-tap-highlight-color: transparent; }
   .skin-name { font-size: 10px; font-weight: 600; line-height: 1.25; }
   .skin-tile code { font-size: 9px; color: #6f7778; }
   @keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 10px; }
+  .slot-input { border: 1px solid #ffffff0c; border-radius: 8px; padding: 9px; background: #141719; }
+  .slot-input label { margin: 0 0 4px; color: #858a8b; font-size: 10px; font-weight: 700; }
+  .slot-card { border: 1px solid #ffffff0c; border-radius: 8px; padding: 9px; background: #141719; margin-bottom: 8px; }
+  .slot-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .slot-num { font-size: 12px; font-weight: 700; color: #ff9a55; }
+  .slot-core { font-size: 12px; color: #858a8b; }
+  .slot-traits { display: flex; flex-direction: column; gap: 6px; }
+  .trait-input { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .trait-input label { font-size: 12px; color: #ff9a55; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin: 0; }
+  .trait-plugin-row { display: flex; width: 100%; align-items: center; gap: 11px; border: 1px solid #ffffff0c; border-radius: 8px; padding: 9px; color: #e1ded6; background: #ffffff04; cursor: pointer; text-align: left; transition: border-color .16s, background .16s; }
+  .trait-plugin-row:hover { border-color: #ff9a552b; background: #f2762b0b; }
+  .trait-plugin-row.selected { border-color: #ff9a55; background: #ff9a5518; box-shadow: inset 2px 0 #ff9a55; }
+  .trait-name-wrapper { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .trait-name { font-size: 12px; font-weight: 600; color: #ff9a55; }
+  .trait-level { font-size: 12px; color: #858a8b; }
+  .trait-row { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; }
+  .trait-display { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+  .trait-info { display: flex; flex-direction: column; gap: 1px; }
+  .trait-head { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+  .trait-id { font-size: 12px; color: #ff9a55; font-weight: 600; font-family: ui-monospace, Consolas, monospace; }
+  .trait-level { font-size: 12px; color: #858a8b; }
+  .trait-name { font-size: 12px; font-weight: 700; color: #ff9a55; }
+  .trait-dropdown { flex-shrink: 1; min-width: 0; }
+  .trait-select { width: 100%; max-width: 160px; border: 1px solid #50565a; border-radius: 6px; padding: 4px 6px; color: #f1eee7; background: #1a1d1f; font-size: 10px; cursor: pointer; }
+  .trait-select:focus { border-color: #ff8b40; box-shadow: 0 0 0 2px #f2762b1b; outline: none; }
 }

@@ -270,6 +270,20 @@ fn is_allowed_route(method: &Method, path: &str) -> bool {
         (&Method::POST, ["accounts", uid, "inventory", "add-all"]) => {
             uid.parse::<u32>().is_ok_and(|id| id > 0)
         }
+        // Remoulding (traits by slot): read equipped cores, read slot contents, save traits.
+        (&Method::GET, ["accounts", uid, "remoulding", "characters"]) => {
+            uid.parse::<u32>().is_ok_and(|id| id > 0)
+        }
+        (&Method::GET, ["accounts", uid, "remoulding", "slots", gun_id]) => {
+            uid.parse::<u32>().is_ok_and(|id| id > 0) && gun_id.parse::<u32>().is_ok_and(|g| g > 0)
+        }
+        (&Method::GET, ["accounts", uid, "remoulding", "plugins"]) => {
+            uid.parse::<u32>().is_ok_and(|id| id > 0)
+        }
+        (&Method::POST, ["accounts", uid, "remoulding", "traits"]) => {
+            uid.parse::<u32>().is_ok_and(|id| id > 0)
+        }
+        (&Method::GET, ["remoulding", "traits-catalog"]) => true,
         _ => false,
     }
 }
@@ -357,6 +371,13 @@ mod tests {
             "accounts/123/inventory/add-all"
         ));
         assert!(is_allowed_route(&Method::POST, "accounts/123/clean"));
+        assert!(is_allowed_route(&Method::GET, "accounts/123/remoulding/characters"));
+        assert!(is_allowed_route(&Method::GET, "accounts/123/remoulding/slots/1074"));
+        assert!(is_allowed_route(&Method::GET, "accounts/123/remoulding/plugins"));
+        assert!(is_allowed_route(&Method::POST, "accounts/123/remoulding/traits"));
+        assert!(is_allowed_route(&Method::GET, "remoulding/traits-catalog"));
+        assert!(!is_allowed_route(&Method::POST, "accounts/abc/remoulding/traits"));
+        assert!(!is_allowed_route(&Method::POST, "accounts/123/remoulding/characters"));
         assert!(is_allowed_route(&Method::POST, "commands"));
         assert!(!is_allowed_route(&Method::GET, "accounts/abc"));
         assert!(!is_allowed_route(&Method::DELETE, "accounts/0"));
