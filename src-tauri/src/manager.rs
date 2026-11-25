@@ -284,19 +284,31 @@ fn pg_running() -> bool {
 async fn ensure_postgres(app: &AppHandle) -> Result<(), String> {
     ensure_postgres_binaries(app).await?;
     fs::create_dir_all(p("logs")).map_err(e)?;
-    if !p("pgdata").join("PG_VERSION").exists() {
+    let pgdata = p("pgdata");
+    if !pgdata.join("PG_VERSION").exists() {
         progress(app, "postgres", 50.0, "Creando la base de datos…");
+        // Clean up any partial cluster from an interrupted initdb, and pre-create pgdata via
+        // Win32 CreateDirectoryW so initdb skips pg_mkdir_p across parent profile dirs.
+        if pgdata.exists() {
+            let _ = fs::remove_dir_all(&pgdata);
+        }
+        fs::create_dir_all(&pgdata).map_err(e)?;
         let out = hidden(Command::new(pg_bin("initdb")).args([
             "-U", "postgres", "-A", "trust", "-E", "UTF8", "--locale=C", "-D",
         ]))
-        .arg(p("pgdata"))
+        .arg(&pgdata)
+        .env("LC_MESSAGES", "C")
         .output()
         .map_err(e)?;
         if !out.status.success() {
-            return Err(format!(
-                "initdb falló: {}",
-                String::from_utf8_lossy(&out.stderr)
-            ));
+            let msg = String::from_utf8_lossy(&out.stderr);
+            let msg = msg.trim();
+            let msg = if msg.is_empty() {
+                String::from_utf8_lossy(&out.stdout).trim().to_string()
+            } else {
+                msg.to_string()
+            };
+            return Err(format!("initdb falló: {msg}"));
         }
     }
     if !pg_running() {
